@@ -68,6 +68,32 @@ reported*, and derived intervals are computed in code
   - `fixed`: a value assumed by a modelling study (not estimated)
   - `maximum`: the longest duration observed (e.g. the longest-surviving
     individuals in an experiment). This is a bound, not a mean.
+
+    **To do: decide how to interpret `maximum` values when building
+    priors.** Some options, taking Bacot (1915) as the example, with
+    exponential survival with mean $m$:
+    - **Treat the value as a fixed upper quantile**, e.g. the 0.95
+      quantile: $m = x/\ln 20 \approx x/3$. For 47 days this gives
+      $m \approx 16$ days.
+    - **Treat it as the maximum of $n$ individuals.** The expected
+      maximum is $m(\ln n + 0.577)$. With $n = 100$–$300$ fleas per
+      cage, $x \approx 5.2$–$6.3\,m$, so 47 days gives
+      $m \approx 7.5$–$9$ days. This depends on $n$ and on how many
+      fleas actually carried infection (65–80% in Bacot's samples).
+    - **Use a likelihood.** The maximum of $n$ exponentials has a known
+      distribution (approximately Gumbel), so each cage can contribute
+      a likelihood term instead of a point value. Cages that failed to
+      infect after storage (8 of 11 in Bacot 1915) are
+      censored/negative observations, and these carry information too.
+
+    Uncertainty in these values is not reported. It comes from the
+    small number of cages, the unknown number of infected survivors,
+    and the fact that the outcome ("still infective") combines flea
+    survival with retention of infection. Conditions also differ from
+    the field: cool (about 8°C), humid, and a different flea species
+    from *X. cheopis*. Any interpretation should carry this uncertainty
+    into the prior, e.g. as a wide interval, rather than treating the
+    converted value as exact.
 - `orig_value`, `orig_units`: the reported value before conversion to
   the canonical units (e.g. survival in hours, or total counts before
   dividing by the number of hosts)

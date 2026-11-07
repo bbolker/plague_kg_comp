@@ -101,6 +101,37 @@
   (`data/lit_params.csv`). KG's 36.5 days treats that maximum as a mean.
   Still open: the sources for KG's rat infectious period and rat
   recovery probability (m_R is "chosen"; g_R is cited to Hirst 1938).
+- [ ] Consider tracking down the earlier work that Bacot (1915) cites in
+      his first paragraph, and adding its values to
+      `data/lit_params.csv` (and the references to the bib). All three
+      are free in PubMed Central:
+  - Verjbitzki (1904), "The part played by insects in the epidemiology
+    of plague", MD thesis, St Petersburg. Bacot cites it as 1904; it was
+    republished in *J. Hyg.* 8: 162–208 (1908; spelled "Verjbitski"
+    there,
+    [PMC2167148](https://pmc.ncbi.nlm.nih.gov/articles/PMC2167148/)).
+    Fleas carried the bacilli and re-infected for up to 3 days;
+  - Indian Plague Commission (1906), "Experiments upon the transmission
+    of plague by fleas. Part II. Transference from rat to rat", *J.
+    Hyg.* 6: 435–449
+    ([PMC2236158](https://pmc.ncbi.nlm.nih.gov/articles/PMC2236158/)):
+    infection by fleas up to 21 days after their last chance to feed
+    on infected blood. The other papers in that issue (*J. Hyg.* 6(4))
+    may also be useful. They include the immunity of Bombay rats
+    (relevant to p and g_R) and chronic plague in rats. This volume
+    may also be the source of KG's garbled "J. Hyg. 6" citation for
+    Bacot;
+  - Bacot & Martin (1914), "Observations on the mechanism of the
+    transmission of plague by fleas", *J. Hyg.* 13 (Plague Suppl. III):
+    423–439
+    ([PMC2167459](https://pmc.ncbi.nlm.nih.gov/articles/PMC2167459/)):
+    infected fleas that were fed regularly lived up to 50 days at
+    10–15°C and 23 days at 27°C, and stayed infected.
+
+  These are mostly persistence of infectivity, in fed and unfed fleas,
+  rather than mean survival, so they need the same care as Bacot 1915
+  (`maximum` type). They may also inform the flea incubation and
+  infectious periods.
 - [ ] Reproduce the louseplague priors with the method in
       `doc/plague.Rnw`:
   - fit independent Gamma/Beta priors whose high-density region covers
