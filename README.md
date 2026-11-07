@@ -80,9 +80,11 @@ also formats the references. Edit `README.qmd`, never `README.md`.
 - `data/`: parameter tables (KG, yersinia scenarios, Park’s literature
   values)
 - `doc/`: write-ups (Quarto)
-- `notes/`: shorter working notes (Quarto), e.g.
-  `notes/density_dependence.qmd` on where rat density dependence acts
-  and how fast inherited resistance wanes
+- `notes/`: shorter working notes (Quarto):
+  - `notes/density_dependence.qmd`: where rat density dependence acts
+    and how fast inherited resistance wanes
+  - `notes/param_comparison.qmd`: literature (Park) vs. KG, Didelot et
+    al. and yersinia parameter values and priors
 - `figs/`: figures
 - `papers/`: downloaded PDFs for full-text reading. This is
   **gitignored** because the repo is public; don’t commit PDFs.

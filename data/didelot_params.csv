@@ -1,0 +1,12 @@
+id,param,study,bibkey,host,vector,location,estimate,lwr,upr,sd,se,n,type,orig_value,orig_units,page,notes
+didelot_gamma_R,inf_period_rat,Didelot et al. (2017),didelot2017model,rat,,"Cairo, 1801",18,,,,,,fixed,0.0556,1/day,Table 2; §3.2,fixed at 1/18 per day 'as in previous studies' (i.e. KG)
+didelot_gamma_H,bubonic_inf_period,Didelot et al. (2017),didelot2017model,human,,"Cairo, 1801",8,,,,,,fixed,0.125,1/day,§3.2,text gives gamma_H = 1/8 per day (consistent with R0_H = beta_I/gamma_H = 0.172); Table 2 says 1/18 per day (an error in the paper); KG's 1/14 per day called 'unrealistically low'
+didelot_g_H,bubonic_recov_prob,Didelot et al. (2017),didelot2017model,human,,"Cairo, 1801",0.1,,,,,,fixed,,,Table 2; §3.2,as in KG and as reported for the 1799 Syria expedition
+didelot_delta_R,flea_free_survival,Didelot et al. (2017),didelot2017model,rat,,"Cairo, 1801",3.7,1.2,8.6,,,,posterior,0.267,1/day,§3.3,carcass infectious period 1/delta_R (delta_R = 0.267 [0.116; 0.845] per day); compared by the authors with ~4-day survival of unfed X. cheopis in Egypt in Jan-Mar
+didelot_rho,carcass_range,Didelot et al. (2017),didelot2017model,rat,,"Cairo, 1801",2.63,1.1,4.33,,,,posterior,,,§3.3,equivalent to KG a*K_R
+didelot_beta_R,carcass_to_rat_trans,Didelot et al. (2017),didelot2017model,rat,,"Cairo, 1801",0.77,0.39,1.66,,,,posterior,,,§3.3,
+didelot_beta_H,carcass_to_human_trans,Didelot et al. (2017),didelot2017model,human,,"Cairo, 1801",0.0145,0.00491,0.0457,,,,posterior,,,§3.3,
+didelot_beta_I,pneum_trans,Didelot et al. (2017),didelot2017model,human,,"Cairo, 1801",0.0215,0.00113,0.0478,,,,posterior,,,§3.3,human-to-human rate beta_I*I_H/N_H (pneumonic or ectoparasite); lower bound as printed (1.13e-3) but the R0_H interval [0.090; 0.382] implies 1.13e-2
+didelot_R0,R0_rat,Didelot et al. (2017),didelot2017model,rat,,"Cairo, 1801",2.85,1.82,3.95,,,,posterior,,,§3.3,R0 = beta_R*(1-exp(-rho))/delta_R
+didelot_d_H,human_death,Didelot et al. (2017),didelot2017model,human,,"Cairo, 1801",8.98e-5,7.95e-5,1.0e-4,,,,posterior,,,§3.3,upper bound printed as 10e-4; the life-expectancy interval (27.3-34.5 yr) implies 1.0e-4
+didelot_K_R,rat_K,Didelot et al. (2017),didelot2017model,rat,,"Cairo, 1801",250000,,,,,,fixed,,,Table 2,initial rat population (assumed equal to human population); dynamics invariant to K_R

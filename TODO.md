@@ -63,9 +63,28 @@
 
 ### 1b. yersinia parameter sets
 
-- [ ] Tabulate the `historical`, `keeling-gilligan`, `didelot`,
+- [x] Tabulate the `historical`, `keeling-gilligan`, `didelot`,
       `modern-estimates` and `defaults` scenarios (`inst/scenarios/`)
-      side by side, along with `prior_default()` from `R/app_priors.R`.
+      side by side, along with `prior_default()` and
+      `plague_fit_prior()`, and compare them with the literature, KG and
+      Didelot et al. values (`R/yersinia_params.R`,
+      `data/didelot_params.csv`, `notes/param_comparison.qmd`).
+- [ ] Fix in yersinia (`add_kg` branch, then upstream):
+  - The `didelot` scenario has `m_h = 0.0556` (1/18 per day). This
+    copies an error in Didelot et al.'s Table 2. Their text and human
+    R0 give gamma_H = 1/8 per day (`m_h = 0.125`).
+  - `prior_default()` for r_r, d_r, r_h and d_h is Uniform(1e-4, 0.1)
+    per day. That puts almost all its mass 1–2 orders of magnitude
+    above every scenario value.
+  - The `keeling-gilligan` scenario's carcass parameters (rho = 10,
+    beta_r = 0.086, beta_h = 2.7e-5) are all outside
+    `plague_fit_prior()`.
+  - Rat infectious periods of 17–25 days in the `didelot`,
+    `keeling-gilligan`, `historical` and `modern-estimates` scenarios
+    all trace back to KG's *chosen* m_R = 20/yr, via Didelot. The
+    literature gives 2–11 days. Only `defaults` (5 days) is consistent.
+- [ ] Didelot et al. (2017) also has posterior correlations (their
+      Fig. 4) and the p0 estimate. Add them if needed for priors.
 - [ ] Find the provenance of the `historical` and `modern-estimates`
       values. Their YAML files give no specific sources.
 - [ ] Check the KG → carcass mapping in `keeling-gilligan.yaml`

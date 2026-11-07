@@ -8,8 +8,8 @@ all: README.md data/params_combined.csv
 README.md: README.qmd plague_kg_comp.bib
 	quarto render README.qmd --to gfm
 
-## KG + Park values in one long table
-data/params_combined.csv: R/params_merge.R data/kg_params.csv data/param_dict.csv data/park_params.csv
+## KG, Park, Didelot and yersinia values in one long table
+data/params_combined.csv: R/params_merge.R R/yersinia_params.R data/kg_params.csv data/param_dict.csv data/park_params.csv data/didelot_params.csv
 	Rscript R/params_merge.R
 
 clean:

@@ -1,0 +1,118 @@
+---
+title: "Plague model parameters: literature (Park) vs. Keeling–Gilligan, Didelot et al. and yersinia"
+date: 2026-11-07
+format:
+  html:
+    embed-resources: true
+bibliography: ../plague_kg_comp.bib
+execute:
+  echo: false
+---
+
+```{r setup}
+#| message: false
+library(dplyr)
+library(tidyr)
+library(readr)
+library(knitr)
+d <- read_csv("../data/params_combined.csv", show_col_types = FALSE)
+```
+
+## Sources
+
+This note compares parameter values from these sources:
+
+- **Park:** literature values compiled by Daniel Park
+  (`data/park_params.csv`).
+- **KG:** @keeling2000bubonic and @keeling2000metapopulation
+  (`data/kg_params.csv`).
+- **Didelot:** fixed values and posterior means [95% CrI] for Cairo 1801
+  from @didelot2017model (`data/didelot_params.csv`).
+- **yersinia scenarios:** the parameter sets in `inst/scenarios/*.yaml`
+  (columns `y:...`).
+- **yersinia priors:** the central 95% intervals of `prior_default()`
+  (the "lab" priors) and `plague_fit_prior()` (the "fit" prior).
+
+All values are converted to the canonical units in
+`data/param_dict.csv`: durations in days and rates per day. yersinia
+uses the carcass formulation, so its rates (`m_r`, `m_h`, `delta_R`)
+are shown as durations (1/rate). The rows `carcass_*` are parameters
+of the carcass model, which has no direct flea-model or literature
+counterpart.
+
+```{r comparison}
+f <- function(x) as.character(signif(x, 3))
+fmt1 <- function(e, l, u) ifelse(is.na(l), f(e), paste0(f(e), " [", f(l), ", ", f(u), "]"))
+park <- d |> filter(source_set == "park") |> group_by(param) |>
+    summarise(Park = paste0(f(min(c(estimate, lwr), na.rm = TRUE)), "–",
+                            f(max(c(estimate, upr), na.rm = TRUE)),
+                            " (", n(), ")"))
+kg <- d |> filter(source_set == "kg") |> transmute(param, KG = f(estimate))
+did <- d |> filter(source_set == "didelot") |>
+    transmute(param, Didelot = paste0(fmt1(estimate, lwr, upr),
+                                      ifelse(type == "fixed", " (fixed)", "")))
+sc <- d |> filter(type == "scenario") |>
+    mutate(sc = paste0("y:", sub("yersinia scenario .(.*).", "\\1", study))) |>
+    select(param, sc, estimate) |>
+    pivot_wider(names_from = sc, values_from = estimate, values_fn = \(x) f(x[1]))
+pr <- d |> filter(type == "prior") |>
+    mutate(ps = ifelse(grepl("fit", study), "prior: fit", "prior: lab")) |>
+    transmute(param, ps, v = paste0("[", f(lwr), ", ", f(upr), "]")) |>
+    pivot_wider(names_from = ps, values_from = v)
+out <- d |> distinct(param, units) |>
+    inner_join(sc, by = "param") |>
+    left_join(park, by = "param") |> left_join(kg, by = "param") |>
+    left_join(did, by = "param") |> left_join(pr, by = "param") |>
+    relocate(Park, KG, Didelot, .after = units)
+kable(out, na = "")
+```
+
+: Parameter values by source. Park's column gives the range of reported values and interval bounds, with the number of entries in brackets. {#tbl-comparison}
+
+## Main points
+
+1. **Rat infectious period.** The literature gives 2–11 days (laboratory
+   infections). KG's 18.25 days ($m_R = 20$/yr) was *chosen*, not
+   estimated. Didelot et al. fixed $\gamma_R = 1/18$ "as in previous
+   studies", i.e. they took it from KG. yersinia's `didelot`,
+   `keeling-gilligan`, `historical` (25 days) and `modern-estimates`
+   (16.7 days) scenarios all inherit values of this size. Only the
+   `defaults` scenario (5 days) agrees with the literature.
+2. **Free-flea survival vs. carcass infectious period.** The literature
+   gives 1–6 days (Bacot & Martin 1924). Didelot's estimate of
+   $1/\delta_R$ is 3.7 [1.2, 8.6] days, and most yersinia scenarios
+   (3.3–5 days) agree. The outlier is KG's 36.5 days ($d_F = 10$/yr),
+   which @didelot2017model already call "unrealistically high"; the
+   yersinia `keeling-gilligan` scenario maps it to $\delta_R$.
+3. **Rat recovery probability.** The literature (Tollenaere et al.
+   2010) gives 0.09–0.17. KG (0.02) and all yersinia scenarios (0–0.03)
+   are much lower, and the 0.167 value is at the edge of the lab prior,
+   Beta(1, 20).
+4. **Human (bubonic) infectious period.** The literature gives 4.6–11
+   days (Indian Plague Commission), or 25–27 days (Scott & Duncan,
+   excluded by Park et al.). KG used 14 days. Didelot et al. used
+   **8 days**: their text and their human $R_0$ give
+   $\gamma_H = 1/8$, while their Table 2 says 1/18, which is an error.
+   yersinia's `didelot` scenario copies the Table 2 error
+   (`m_h = 0.0556`, 18 days).
+5. **Case fatality.** Survival of 0.1 (KG, Didelot and most yersinia
+   scenarios) is within the literature range of 0 (Eyam) to 0.34 (US
+   1900–2012, partly treated cases).
+6. **yersinia priors vs. scenario values.**
+   - The lab priors for the demographic rates ($r_r$, $d_r$, $r_h$,
+     $d_h$; Uniform(1e-4, 0.1) per day) put almost all their mass 1–2
+     orders of magnitude above every scenario value. For example,
+     $d_h = 0.05$/day is a life expectancy of 20 days. These parameters
+     are fixed by default in the lab, but the priors are misleading if
+     they are freed.
+   - The `keeling-gilligan` scenario's carcass parameters
+     ($\rho = 10$, $\beta_r = 0.086$, $\beta_h = 2.7 \times 10^{-5}$)
+     all lie outside the fit priors. The KG mapping therefore can't be
+     recovered by fitting with the default priors.
+7. **Transmission rates aren't comparable across model types.** The
+   flea-model transmission rates ($\beta_R$ in KG; $\beta_r$, $\beta_b$
+   in Dean et al.) and the carcass-model ones ($\beta^Q_r$, $\beta^Q_h$)
+   scale differently. The only common currency is $R_0$: 3.09 for KG,
+   and 2.85 [1.82, 3.95] for Didelot.
+
+## References

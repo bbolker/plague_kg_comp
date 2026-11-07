@@ -7,6 +7,9 @@
 ##  - data/park_params.csv: Park's compendium (canonical, edited by hand),
 ##    with quantities as reported (mean + SD/SE + n, ranges, point values).
 ##    Intervals for mean_sd/mean_se rows are derived here.
+##  - data/didelot_params.csv: Didelot et al. (2017) fixed values and
+##    posterior estimates (same format as park_params.csv)
+##  - yersinia package scenarios and default priors (R/yersinia_params.R)
 ##
 ## Run as a script (from the project root) to write data/params_combined.csv.
 
@@ -15,6 +18,8 @@ suppressPackageStartupMessages({
     library(readr)
     library(purrr)
 })
+
+source("R/yersinia_params.R")
 
 read_dict <- function(file = "data/param_dict.csv") {
     read_csv(file, show_col_types = FALSE)
@@ -38,23 +43,25 @@ derive_intervals <- function(d, z = qnorm(0.975)) {
             interval = case_when(!is.na(half) ~ "95% CI (derived)",
                                  type == "range" ~ "range",
                                  type == "CI" ~ "CI (reported)",
+                                 type == "posterior" ~ "95% CrI (reported)",
                                  .default = NA_character_),
             lwr = coalesce(lwr, estimate - half),
             upr = coalesce(upr, estimate + half)) |>
         select(-half)
 }
 
-##' Park's compendium (canonical CSV), with labels/units from the dictionary
-park_long <- function(file = "data/park_params.csv", dict = read_dict()) {
-    park <- read_csv(file, show_col_types = FALSE)
-    unmatched <- setdiff(park$param, dict$param)
+##' A hand-entered literature table (e.g. data/park_params.csv), with
+##' labels/units from the dictionary
+lit_long <- function(file, source_set, dict = read_dict()) {
+    lit <- read_csv(file, show_col_types = FALSE)
+    unmatched <- setdiff(lit$param, dict$param)
     if (length(unmatched) > 0) {
         stop("parameters missing from data/param_dict.csv: ",
              paste(unmatched, collapse = ", "))
     }
-    park |>
+    lit |>
         left_join(select(dict, param, label, units), by = "param") |>
-        mutate(source_set = "park") |>
+        mutate(source_set = source_set) |>
         derive_intervals()
 }
 
@@ -83,13 +90,16 @@ kg_long <- function(kg = read_csv("data/kg_params.csv", show_col_types = FALSE),
 }
 
 ##' Combine all sources
-combine_params <- function(kg = kg_long(), park = park_long()) {
+combine_params <- function(kg = kg_long(),
+                           park = lit_long("data/park_params.csv", "park"),
+                           didelot = lit_long("data/didelot_params.csv", "didelot"),
+                           yersinia = yersinia_long()) {
     cols <- c("param", "label", "source_set", "id", "study", "bibkey",
               "host", "vector", "location",
               "estimate", "lwr", "upr", "interval", "sd", "se", "n", "type",
               "units", "basis", "orig_symbol", "orig_value", "orig_units",
               "page", "notes")
-    bind_rows(kg, park) |>
+    bind_rows(kg, park, didelot, yersinia) |>
         select(any_of(cols)) |>
         arrange(param, source_set, id)
 }
