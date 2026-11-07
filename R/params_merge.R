@@ -9,6 +9,8 @@
 ##    Intervals for mean_sd/mean_se rows are derived here.
 ##  - data/didelot_params.csv: Didelot et al. (2017) fixed values and
 ##    posterior estimates (same format as park_params.csv)
+##  - data/lit_params.csv: our own extractions from the literature (same
+##    format)
 ##  - yersinia package scenarios and default priors (R/yersinia_params.R)
 ##
 ## Run as a script (from the project root) to write data/params_combined.csv.
@@ -93,13 +95,14 @@ kg_long <- function(kg = read_csv("data/kg_params.csv", show_col_types = FALSE),
 combine_params <- function(kg = kg_long(),
                            park = lit_long("data/park_params.csv", "park"),
                            didelot = lit_long("data/didelot_params.csv", "didelot"),
+                           lit = lit_long("data/lit_params.csv", "lit"),
                            yersinia = yersinia_long()) {
     cols <- c("param", "label", "source_set", "id", "study", "bibkey",
               "host", "vector", "location",
               "estimate", "lwr", "upr", "interval", "sd", "se", "n", "type",
               "units", "basis", "orig_symbol", "orig_value", "orig_units",
               "page", "notes")
-    bind_rows(kg, park, didelot, yersinia) |>
+    bind_rows(kg, park, didelot, lit, yersinia) |>
         select(any_of(cols)) |>
         arrange(param, source_set, id)
 }

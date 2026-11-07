@@ -23,32 +23,32 @@
       Park's compendium. Add the sources to the bib and the values to
       the tidy parameter table (1c).
 
-      | Source (KG Table 1 ref.) | bibkey | Parameters | Access |
-      |---|---|---|---|
-      | 1. Buckle & Smith (eds) 1994 | `buckle1994rodent` | r_R, d_R | book (CAB International, not OUP as KG say) |
-      | 2. Hirst 1938 | `hirst1938plague` | p, g_R, K_F | McMaster print only (below) |
-      | 3. Wheeler & Douglas 1945 | `wheeler1945sylvatic` | β_R | doi:10.1093/infdis/77.1.1 |
-      | 4. Macchiavello 1954 | `macchiavello1954reservoirs` | β_R | 12-part serial in *J. Trop. Med. Hyg.* 57: 3–298 (KG cite pp. 1–68) |
-      | 5. Hinnebusch, Gage & Schwan 1998 | `hinnebusch1998estimation` | β_R | doi:10.4269/ajtmh.1998.58.562 |
-      | 6. Bacot 1915 | `bacot1915observations` | d_F | free: <https://pmc.ncbi.nlm.nih.gov/articles/PMC2206740/> |
+  | Source (KG Table 1 ref.) | bibkey | Parameters | Access |
+  |---|---|---|---|
+  | 1. Buckle & Smith (eds) 1994 | `buckle1994rodent` | r_R, d_R | book (CAB International, not OUP as KG say) |
+  | 2. Hirst 1938 | `hirst1938plague` | p, g_R, K_F | McMaster print only (below) |
+  | 3. Wheeler & Douglas 1945 | `wheeler1945sylvatic` | β_R | doi:10.1093/infdis/77.1.1 |
+  | 4. Macchiavello 1954 | `macchiavello1954reservoirs` | β_R | 12-part serial in *J. Trop. Med. Hyg.* 57: 3–298 (KG cite pp. 1–68) |
+  | 5. Hinnebusch, Gage & Schwan 1998 | `hinnebusch1998estimation` | β_R | doi:10.4269/ajtmh.1998.58.562 |
+  | 6. Bacot 1915 | `bacot1915observations` | d_F | free: <https://pmc.ncbi.nlm.nih.gov/articles/PMC2206740/> |
 
-      Hirst (1938): no free online copy found as of 2026-11-07. The
-      encyclopaedia (ed. Rolleston, Butterworth) is partly scanned on
-      archive.org (Digital Library of India), but vol. IX, which
-      covers "Plague", wasn't among the volumes identified.
-      **McMaster has it in print:** *British Encyclopaedia of Medical
-      Practice* (1936–39, 12 v.), Health Sciences Library, History of
-      Health & Medicine Room (lower level), call no. **WB 13 .B862
-      1936**. The Omni record notes "Gift: Ms. C. Reimann (v. 9)", so
-      vol. 9 is held. It isn't digitised and the room may be for
-      consultation only, so plan to scan pp. 675–698 on site and put
-      the scan in `papers/`.
-      Hirst's book *The Conquest of Plague* (Oxford: Clarendon, 1953)
-      may give the same data on rat resistance and flea indices.
-      McMaster doesn't hold it, but other libraries in the Omni
-      network do (two records), so request it through Omni. Also, the KG value
-      of p (inherited resistance) is cited to Hirst, contrary to the
-      yersinia documentation, which says p has "no empirical basis".
+  Hirst (1938): no free online copy found as of 2026-11-07. The
+  encyclopaedia (ed. Rolleston, Butterworth) is partly scanned on
+  archive.org (Digital Library of India), but vol. IX, which
+  covers "Plague", wasn't among the volumes identified.
+  **McMaster has it in print:** *British Encyclopaedia of Medical
+  Practice* (1936–39, 12 v.), Health Sciences Library, History of
+  Health & Medicine Room (lower level), call no. **WB 13 .B862
+  1936**. The Omni record notes "Gift: Ms. C. Reimann (v. 9)", so
+  vol. 9 is held. It isn't digitised and the room may be for
+  consultation only, so plan to scan pp. 675–698 on site and put
+  the scan in `papers/`.
+  Hirst's book *The Conquest of Plague* (Oxford: Clarendon, 1953)
+  may give the same data on rat resistance and flea indices.
+  McMaster doesn't hold it, but other libraries in the Omni
+  network do (two records), so request it through Omni. Also, the KG value
+  of p (inherited resistance) is cited to Hirst, contrary to the
+  yersinia documentation, which says p has "no empirical basis".
 
 ### 1b. yersinia parameter sets
 
@@ -95,10 +95,12 @@
     adopted by Didelot et al. and yersinia) vs. 2–11 days;
   - rat recovery probability: KG 0.02 vs. 0.09–0.17.
 
-  Still to do: look at what Bacot 1915 actually reports
-  (`bacot1915observations`, *J. Hyg.* 14, Plague Suppl. IV: 770–773;
-  free at <https://pmc.ncbi.nlm.nih.gov/articles/PMC2206740/>; save as
-  `papers/bacot1915.pdf`).
+  Bacot (1915), KG's source for d_F, reports only the *maximum*
+  persistence of infectivity: 3 of 11 cages of *C. fasciatus* were still
+  infective after 29–47 days without a host in cool, humid storage
+  (`data/lit_params.csv`). KG's 36.5 days treats that maximum as a mean.
+  Still open: the sources for KG's rat infectious period and rat
+  recovery probability (m_R is "chosen"; g_R is cited to Hirst 1938).
 - [ ] Reproduce the louseplague priors with the method in
       `doc/plague.Rnw`:
   - fit independent Gamma/Beta priors whose high-density region covers

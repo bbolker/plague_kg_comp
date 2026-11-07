@@ -23,7 +23,8 @@ d <- read_csv("../data/params_combined.csv", show_col_types = FALSE)
 This note compares parameter values from these sources:
 
 - **Park:** literature values compiled by Daniel Park
-  (`data/park_params.csv`).
+  (`data/park_params.csv`), plus our own extractions
+  (`data/lit_params.csv`), which aren't shown in the Park column.
 - **KG:** @keeling2000bubonic and @keeling2000metapopulation
   (`data/kg_params.csv`).
 - **Didelot:** fixed values and posterior means [95% CrI] for Cairo 1801
@@ -83,7 +84,11 @@ kable(out, na = "")
    $1/\delta_R$ is 3.7 [1.2, 8.6] days, and most yersinia scenarios
    (3.3–5 days) agree. The outlier is KG's 36.5 days ($d_F = 10$/yr),
    which @didelot2017model already call "unrealistically high"; the
-   yersinia `keeling-gilligan` scenario maps it to $\delta_R$.
+   yersinia `keeling-gilligan` scenario maps it to $\delta_R$. KG's
+   source, @bacot1915observations, doesn't measure mean survival. It
+   found that 3 of 11 cages of infected *C. fasciatus* were still
+   infective after 29–47 days without a host in cool storage, i.e. a
+   *maximum* persistence.
 3. **Rat recovery probability.** The literature (Tollenaere et al.
    2010) gives 0.09–0.17. KG (0.02) and all yersinia scenarios (0–0.03)
    are much lower, and the 0.167 value is at the edge of the lab prior,

@@ -1,0 +1,4 @@
+id,param,study,bibkey,host,vector,location,estimate,lwr,upr,sd,se,n,type,orig_value,orig_units,page,notes
+bacot1915_cage2,flea_free_survival,Bacot (1915),bacot1915observations,mouse,Ceratophyllus fasciatus,"London (laboratory), 35-60 F",29,,,,,,maximum,,,p. 771 table (cage 2),infectivity retained after 29 days without a host: a lower bound on the survival of the longest-lived infected fleas in a cage of 100-300 (cool and humid storage). Not a mean survival time
+bacot1915_cage3,flea_free_survival,Bacot (1915),bacot1915observations,mouse,Ceratophyllus fasciatus,"London (laboratory), 35-60 F",34,,,,,,maximum,,,p. 771 table (cage 3),as for cage 2
+bacot1915_cage8,flea_free_survival,Bacot (1915),bacot1915observations,mouse,Ceratophyllus fasciatus,"London (laboratory), 35-60 F",47,,,,,,maximum,,,p. 771 table (cage 8),as for cage 2; mouse infected ~20 days after being placed in the cage. 8 of 11 cages (stored 18-73 days) did not infect mice after storage
