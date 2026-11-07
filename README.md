@@ -69,8 +69,7 @@ Rscript get_pkgs.R
 This installs the CRAN packages, the mrc-ide packages (`odin2`, `dust2`,
 `monty`, from the mrc-ide r-universe) and `yersinia`. It installs
 `yersinia` from GitHub, using the `add_kg` branch of `bbolker/yersinia`
-(where a ‘true’ KG model variant is being developed) and falling back to
-the default branch if that branch doesn’t exist.
+(where a ‘true’ KG model variant is being developed).
 
 `README.md` is generated from `README.qmd` by `make README.md`, which
 also formats the references. Edit `README.qmd`, never `README.md`.

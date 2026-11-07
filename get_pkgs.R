@@ -38,14 +38,5 @@ if (length(mrc_pkgs) > 0) {
                                getOption("repos")))
 }
 
-## yersinia: fork with the 'true' Keeling-Gilligan model variant (add_kg branch);
-## fall back to the default branch if add_kg doesn't exist (yet)
-ok <- tryCatch({
-    remotes::install_github("bbolker/yersinia@add_kg", upgrade = "never")
-    TRUE
-}, error = function(e) {
-    message("installing bbolker/yersinia@add_kg failed (", conditionMessage(e),
-            "); installing default branch instead")
-    FALSE
-})
-if (!ok) remotes::install_github("bbolker/yersinia", upgrade = "never")
+## yersinia: fork with the 'true' Keeling-Gilligan model variant (add_kg branch)
+remotes::install_github("bbolker/yersinia@add_kg", upgrade = "never")
