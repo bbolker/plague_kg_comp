@@ -16,8 +16,15 @@
 
 ### 1a. Keeling–Gilligan parameters
 
-- [ ] Tabulate the parameters of both KG 2000 papers, with units, and
-      convert everything to per-day rates.
+- [x] Tabulate the parameters of both KG 2000 papers, with units, and
+      convert everything to per-day rates (`data/kg_params.csv`,
+      `data/kg_a_lower_bounds.csv`, `R/kg_params.R`; see `data/README.md`).
+- [ ] Remaining KG material to tabulate: the cellular automaton
+      transition probabilities (Proc R Soc B Table 3) and the
+      sensitivity results (Fig. 3).
+- [ ] The annual mean of KG's seasonal K_F, computed from their stated
+      range (3.29 to 11.17), is 6.64 rather than the stated 6.57.
+      Probably a rounding issue in the range; check.
 - [ ] Note which values are measured, which are assumed and which are
       tuned (e.g. Park et al. rejected KG's rat infectious period as
       implausible).
@@ -68,8 +75,34 @@
 
 ### 1c. Park's review of parameter values
 
-- [ ] Import `data/parameter.R` and `data/param_tab.R` from louseplague
-      into a tidy table (study, parameter, estimate, lwr, upr, type).
+- [x] Import Park's compendium (`louseplague/data/parameter.R`) and
+      merge it with the KG values (`R/params_merge.R` →
+      `data/params_combined.csv`).
+- [x] Changes to the format of Park's compendium:
+  - `data/park_params.csv` is now the canonical source, edited by hand;
+    `parameter.R` is retired for this project.
+  - Quantities are stored as reported. Gani & Leach are `mean_sd` with
+    n; Tollenaere et al. are `mean_se`. The CIs are derived in
+    `R/params_merge.R`.
+  - Every study has a `bibkey`, and the entries are in
+    `plague_kg_comp.bib`.
+  - Added `host`, `vector` and `location` columns, filled in from Park's
+    comments and the reference titles, plus `orig_value`/`orig_units`
+    for converted values and an empty `page` column.
+- [ ] Fill in `page` (and check `host`/`vector`/`location`) as the
+      sources are read. Resolve Park's open questions:
+  - whether Tollenaere et al. report SE or SD;
+  - Guernier et al.'s flea index ("appear to be wrong??");
+  - Davis & Fales: Park divided rat counts by 10^6 humans; check the
+    actual human population;
+  - the meaning of Park's 'i5, i6, 17' comment on Tollenaere's
+    recovery probabilities.
+- [ ] The overlap between KG and Park shows large disagreements:
+  - free-flea survival: KG 36.5 days (citing Bacot 1915) vs. 1–6 days
+    (Bacot & Martin 1924);
+  - rat infectious period: KG 18.25 days vs. 3–9 days;
+  - rat recovery probability: KG 0.02 vs. 0.09–0.17.
+  Look at what Bacot 1915 actually reports.
 - [ ] Reproduce the louseplague priors with the method in
       `doc/plague.Rnw`:
   - fit independent Gamma/Beta priors whose high-density region covers

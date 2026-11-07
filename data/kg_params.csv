@@ -1,0 +1,21 @@
+symbol,category,description,value,min,max,units,kg_status,procrsb_sources,nature_sources,yersinia_name,notes
+r_R,rat,rat reproductive rate,5,,,1/yr,estimated,Buckle & Smith 1994,Buckle & Smith 1994,r_r,
+p,rat,probability of inherited resistance,0.975,,,probability,estimated,Hirst 1938,Hirst 1938,p,1-p sets the rate at which resistance wanes; see notes/density_dependence.qmd
+K_R,rat,rat carrying capacity (per subpopulation),2500,,,rats,fundamental,,,K_r,only the product a*K_R matters (Proc R Soc B §6); metapopulation simulations use 60000 rats in a 5x5 grid (2400 per patch)
+d_R,rat,natural death rate of rats,0.2,,,1/yr,estimated,Buckle & Smith 1994,Buckle & Smith 1994,d_r,
+beta_R,rat,transmission rate (flea to rat),4.7,,,1/yr,estimated,Wheeler & Douglas 1945; Macchiavello 1954; Hinnebusch et al. 1998,Macchiavello 1954,beta_r,yersinia beta_r is a carcass-to-rat rate; its keeling-gilligan scenario maps beta_r = beta_R*K_F/(1-g_R)
+m_R,rat,1/(rat infectious period),20,,,1/yr,chosen,,,m_r,infectious period about 18 days; rejected as implausible by Park et al. (louseplague)
+g_R,rat,probability that an infected rat recovers,0.02,,,probability,estimated,Hirst 1938,Hirst 1938,g_r,
+a,flea,flea searching efficiency,0.004,,,1/rats,fundamental,,,rho,yersinia rho = a*K_R; R0 > 1 iff a*K_R > 0.39 (Proc R Soc B §6); lower bounds in kg_a_lower_bounds.csv; Proc R Soc B Fig. 4 varies a from 0.001 to 0.016
+r_F,flea,flea reproductive rate,20,,,1/yr,chosen,,,,no yersinia equivalent
+d_F,flea,death rate of free fleas,10,,,1/yr,estimated,Bacot 1915,Bacot 1915,delta_R,yersinia keeling-gilligan scenario maps delta_R = d_F; KG's citation details for Bacot look garbled (J. Hyg. vol. 6 is 1906)
+K_F,flea,flea carrying capacity per rat (flea index),6.57,3.29,11.17,fleas/rat,estimated,Hirst 1938,Hirst 1938,,Proc R Soc B: seasonal K_F = k_F*(1+kappa_F)^sin(2*pi*season) ranging 3.29 to 11.17 with mean 6.57; Nature: constant 6.57
+mu_R,spatial,rat movement rate between neighbouring subpopulations,0.03,,,1/yr,chosen,,Methods text,mu_r,
+mu_F,spatial,flea movement rate between neighbouring subpopulations,0.008,,,1/yr,chosen,,Methods text,,
+N_R_total,spatial,total rat population in metapopulation simulations,60000,,,rats,setup,,figure caption and Methods,,divided into 25 subpopulations (5x5 grid) with nearest-neighbour coupling
+n_patch,spatial,number of subpopulations,25,,,patches,setup,,Methods text,npop,5x5 grid; nearest-neighbour coupling
+r_H,human,human reproductive rate,0.045,,,1/yr,chosen,,,r_h,human parameters are not in the Nature paper and are not used in lambda_H
+d_H,human,human natural death rate,0.04,,,1/yr,chosen,,,d_h,
+beta_H,human,transmission rate to humans,0.01,,,1/yr,chosen,,,beta_h,
+m_H,human,1/(human infectious period),26,,,1/yr,chosen,,,m_h,infectious period about 14 days
+g_H,human,probability that an infected human recovers,0.1,,,probability,chosen,,,g_h,

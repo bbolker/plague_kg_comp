@@ -1,0 +1,5 @@
+species,density_min,density_max,a_min_lwr,a_min_upr,notes
+eastern American chipmunk,500,1000,3.91e-4,7.82e-4,
+western American chipmunk,1500,1500,2.61e-4,2.61e-4,density given as 'around 1500'
+black-tailed prairie dog,640,1560,2.51e-4,6.11e-4,
+ground squirrels,400,2000,1.96e-4,9.78e-4,

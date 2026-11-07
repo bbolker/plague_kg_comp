@@ -1,0 +1,51 @@
+id,param,study,bibkey,host,vector,location,estimate,lwr,upr,sd,se,n,type,orig_value,orig_units,page,notes
+gani_2004a,pneum_incub,Gani and Leach (2004),gani2004epidemiologic,human,,,4.3,,,1.8,,224,mean_sd,,,,
+kool_2005a,pneum_incub,Kool and Weinstein (2005),kool2005risk,human,,,,1,6,,,,range,,,,
+tieh_1948,pneum_incub,Tieh et al. (1948),tieh1948primary,human,,"Mukden, 1946",,3,5,,,,range,,,,
+perry_1997a,pneum_incub,Perry and Fetherston (1997),perry1997yersinia,human,,,,1,3,,,,range,,,,
+gani_2004b,pneum_inf_period,Gani and Leach (2004),gani2004epidemiologic,human,,,2.5,,,1.2,,225,mean_sd,,,,
+kool_2005b,pneum_inf_period,Kool and Weinstein (2005),kool2005risk,human,,,,1,3,,,,range,,,,
+davis_1949_1,rat_human_ratio,Davis and Fales (1949),davis1949distribution,,,"Baltimore, Maryland",0.119,,,,,,point estimate,119000,rats,,Park divided rat-population estimates by 10^6 (human population)
+davis_1949_2,rat_human_ratio,Davis and Fales (1949),davis1949distribution,,,"Baltimore, Maryland",0.158,,,,,,point estimate,158000,rats,,Park divided rat-population estimates by 10^6 (human population)
+boelter_1909,rat_human_ratio,Boelter (1909),boelter1909rat,,,,1,,,,,,point estimate,,,,
+engelthaler_2000b,inf_period_rat,Engelthaler et al. (2000),engelthaler2000quantitative,mice,,,3.2,2,5,,,,range,,,,Park: this study uses mice rather than rats
+tollenaere2010a,inf_period_rat,Tollenaere et al. (2010),tollenaere2010susceptibility,Rattus rattus,,Madagascar,8.6,,,,1.14,,mean_se,,,,Park unsure whether SE or SD is reported; check
+tollenaere2010b,inf_period_rat,Tollenaere et al. (2010),tollenaere2010susceptibility,Rattus rattus,,Madagascar,4.84,,,,0.3,,mean_se,,,,Park unsure whether SE or SD is reported; check
+tollenaere2010c,inf_period_rat,Tollenaere et al. (2010),tollenaere2010susceptibility,Rattus rattus,,Madagascar,4.39,,,,0.52,,mean_se,,,,Park unsure whether SE or SD is reported; check
+tollenaere2010d,inf_period_rat,Tollenaere et al. (2010),tollenaere2010susceptibility,Rattus rattus,,Madagascar,5.15,,,,0.44,,mean_se,,,,Park unsure whether SE or SD is reported; check
+tollenaere2010e_1,recov_prob_rat,Tollenaere et al. (2010),tollenaere2010susceptibility,Rattus rattus,,Madagascar,0.167,,,,,,point estimate,0.833,mortality,,Park's comment: 'i5; i6; 17'; estimate = 1 - mortality
+tollenaere2010e_2,recov_prob_rat,Tollenaere et al. (2010),tollenaere2010susceptibility,Rattus rattus,,Madagascar,0.1,,,,,,point estimate,0.9,mortality,,estimate = 1 - mortality
+tollenaere2010e_3,recov_prob_rat,Tollenaere et al. (2010),tollenaere2010susceptibility,Rattus rattus,,Madagascar,0.091,,,,,,point estimate,0.909,mortality,,estimate = 1 - mortality
+scott_2001a,bubonic_incub,Scott and Duncan (2001),scott2001biology,human,,,,10,12,,,,range,,,,louseplague plague.Rnw says Scott & Duncan's latent and infectious periods were excluded as implausible
+smego_1999,bubonic_incub,Smego et al. (1999),smego1999yersiniosis,human,,,,2,8,,,,range,,,,
+perry_1997b,bubonic_incub,Perry and Fetherston (1997),perry1997yersinia,human,,,,2,6,,,,range,,,,
+scott_2001b,bubonic_inf_period,Scott and Duncan (2001),scott2001biology,human,,,,25,27,,,,range,,,,louseplague plague.Rnw says Scott & Duncan's latent and infectious periods were excluded as implausible
+india_1908_1,bubonic_inf_period,Indian Plague Commission (1908),india1908,human,,India,6.4,,,,,,point estimate,,,,
+india_1908_2,bubonic_inf_period,Indian Plague Commission (1908),india1908,human,,India,4.6,,,,,,point estimate,,,,
+india_1908_3,bubonic_inf_period,Indian Plague Commission (1908),india1908,human,,India,10.3,,,,,,point estimate,,,,
+india_1908_4,bubonic_inf_period,Indian Plague Commission (1908),india1908,human,,India,11,,,,,,point estimate,,,,
+kugeler_2015,bubonic_recov_prob,Kugeler et al. (2015),kugeler2015epidemiology,human,,"United States, 1900-2012",0.34,,,,,,point estimate,,,,
+daniel_1985,bubonic_recov_prob,Daniel (1985),daniel1985story,human,,Eyam,0,,,,,,point estimate,,,,
+josko_2004,second_pneum_prob,Josko (2004),josko2004yersinia,human,,,,0.05,0.15,,,,range,,,,
+alsofrom_1981,second_pneum_prob,Alsofrom (1981),alsofrom1981radiographic,human,,"New Mexico, 1975-1980",0.21,,,,,42,point estimate,,,,n = 42 proved cases (from the title)
+guernier_2014,flea_index,Guernier et al. (2014),guernier2014fleas,Rattus rattus,,Reunion Island,3.15,,,,,40,point estimate,126,fleas,,126 fleas on 40 rats; Park: 'specific flea index they report appear to be wrong??'
+carrion_1932_1,flea_index,Carrion and Arturo (1932),carrion1932final,,Xenopsylla cheopis (mostly),"San Juan, Puerto Rico",13.9,,,,,,point estimate,,,,Park's comment: 'Mostly X. cheopis on Mus spp.'
+carrion_1932_2,flea_index,Carrion and Arturo (1932),carrion1932final,,Xenopsylla cheopis (mostly),"San Juan, Puerto Rico",2.4,,,,,,point estimate,,,,Park's comment: 'Mostly X. cheopis on Mus spp.'
+carrion_1932_3,flea_index,Carrion and Arturo (1932),carrion1932final,,Xenopsylla cheopis (mostly),"San Juan, Puerto Rico",5.8,,,,,,point estimate,,,,Park's comment: 'Mostly X. cheopis on Mus spp.'
+carrion_1932_4,flea_index,Carrion and Arturo (1932),carrion1932final,,Xenopsylla cheopis (mostly),"San Juan, Puerto Rico",3.5,,,,,,point estimate,,,,Park's comment: 'Mostly X. cheopis on Mus spp.'
+engelthaler_2000a,flea_incub,Engelthaler et al. (2000),engelthaler2000quantitative,,,,16.5,15,18,,,,range,,,,
+pollitzer_1952,flea_incub,Pollitzer (1952),pollitzer_plague_1952,,,,,9,26,,,,range,,,,
+bacot_1924_1,flea_free_survival,Bacot and Martin (1924),bacot1924respective,,Xenopsylla cheopis,,6.3333,,,,,,point estimate,152,hours,,different temperature/humidity conditions
+bacot_1924_2,flea_free_survival,Bacot and Martin (1924),bacot1924respective,,Xenopsylla cheopis,,2.8333,,,,,,point estimate,68,hours,,different temperature/humidity conditions
+bacot_1924_3,flea_free_survival,Bacot and Martin (1924),bacot1924respective,,Xenopsylla cheopis,,1.8333,,,,,,point estimate,44,hours,,different temperature/humidity conditions
+bacot_1924_4,flea_free_survival,Bacot and Martin (1924),bacot1924respective,,Xenopsylla cheopis,,1.125,,,,,,point estimate,27,hours,,different temperature/humidity conditions
+evans_1952,louse_growth,Evans and Smith (1952),evans1952intrinsic,,Pediculus humanus,,0.11,,,,,,point estimate,,,,
+peacock_1916,louse_index,Peacock (1916),peacock1916louse,human,Pediculus humanus,Western Front,14.7,,,,,,point estimate,,,,
+foucault_2006,louse_index,Foucault et al. (2006),foucault2006oral,human,Pediculus humanus,,67.7857,,,,,28,point estimate,1898,lice,,1898 lice on 28 people
+houhamdi_2006,louse_inf_period,Houhamdi et al. (2006),houhamdi2006experimental,,Pediculus humanus,,,2,3,,,,range,,,,
+dean_2018a,pneum_trans,Dean et al. (2018),dean2018human,,,,0.5,0,1,,,,range,,,,prior used by Dean et al.
+dean_2018b,flea_to_rat_trans,Dean et al. (2018),dean2018human,,,,0.5,0,1,,,,range,,,,prior used by Dean et al.
+dean_2018c,flea_to_human_trans,Dean et al. (2018),dean2018human,,,,0.1,0,0.2,,,,range,,,,prior used by Dean et al.
+dean_2018d,louse_to_human_trans,Dean et al. (2018),dean2018human,,,,0.05,,,,,,point estimate,,,,value used by Dean et al.
+dean_2018e,human_to_louse_trans,Dean et al. (2018),dean2018human,,,,0.5,0,1,,,,range,,,,prior used by Dean et al.
+dean_2018f,flea_search,Dean et al. (2018),dean2018human,,,,3,,,,,,point estimate,,,,value used by Dean et al.

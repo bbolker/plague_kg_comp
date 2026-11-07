@@ -1,0 +1,31 @@
+param,label,park_label,mode,description,units,kg_symbol,kg_transform,yersinia_name,kg_comparable,notes
+inf_period_rat,1/\gamma_r,1/gamma[r],rat-flea,rat infectious period,days,m_R,365/x,m_r,yes,yersinia m_r is a rate (per day) = 1/x
+recov_prob_rat,g_r,g[r],rat-flea,probability that an infected rat recovers,probability,g_R,x,g_r,yes,
+inherit_resist,p_i,,rat-flea,probability of inherited resistance,probability,p,x,p,yes,not in Park's compendium; label chosen to avoid clash with p_s
+rat_growth,r_r,,rat-flea,rat reproductive rate,1/day,r_R,x/365,r_r,yes,not in Park's compendium
+rat_death,d_r,,rat-flea,natural death rate of rats,1/day,d_R,x/365,d_r,yes,not in Park's compendium
+rat_K,K_r,,rat-flea,rat carrying capacity per subpopulation,rats,K_R,x,K_r,yes,not in Park's compendium; only a*K_R matters in KG
+rat_human_ratio,N_r/N_h,N[r]/N[h],rat-flea,rat-to-human ratio,ratio,,,,,
+flea_to_rat_trans,\beta_r,beta[r],rat-flea,flea-to-rat transmission rate,1/day,beta_R,x/365,beta_r,partial,KG and Dean et al. infection terms have similar forms but different scalings; yersinia beta_r is a carcass-to-rat rate
+flea_search,s_f,s[f],rat-flea,flea searching efficiency,depends on model scaling,a,x,rho,no,KG a has units 1/rats (a*K_R = 10); Dean et al. s_f uses a different population scaling; yersinia rho = a*K_R
+flea_growth,r_f,r[f],rat-flea,flea reproductive rate,1/day,r_F,x/365,,yes,
+flea_index,K_f,K[f],rat-flea,flea carrying capacity per rat (flea index),fleas/rat,K_F,x,,yes,KG Proc R Soc B: seasonal range 3.29 to 11.17 (not an uncertainty range)
+flea_free_survival,1/d_f,1/d[f],rat-flea,mean survival time of free (off-host) fleas,days,d_F,365/x,delta_R,yes,yersinia keeling-gilligan scenario maps delta_R = d_F (per day)
+flea_incub,1/\sigma_f,1/sigma[f],rat-flea,flea mean extrinsic incubation period,days,,,,,
+flea_move,\mu_f,,rat-flea,flea movement rate between subpopulations,1/day,mu_F,x/365,,yes,not in Park's compendium
+rat_move,\mu_r,,rat-flea,rat movement rate between subpopulations,1/day,mu_R,x/365,mu_r,yes,not in Park's compendium
+flea_to_human_trans,\beta_b,beta[b],rat-flea,flea-to-human transmission rate,1/day,beta_H,x/365,beta_h,no,KG: beta_H*S_H*F*exp(-a*T_R) (density-dependent); different scaling from Dean et al.
+human_growth,r_h,,human,human reproductive rate,1/day,r_H,x/365,r_h,yes,not in Park's compendium
+human_death,d_h,,human,human natural death rate,1/day,d_H,x/365,d_h,yes,not in Park's compendium
+bubonic_incub,1/\sigma_b,1/sigma[b],rat-flea,bubonic plague mean incubation period,days,,,,,
+bubonic_inf_period,1/\gamma_b,1/gamma[b],rat-flea,bubonic plague mean infectious period,days,m_H,365/x,m_h,yes,KG has no incubation class; yersinia m_h is a rate (per day) = 1/x
+bubonic_recov_prob,g_b,g[b],rat-flea,probability of recovering from bubonic plague,probability,g_H,x,g_h,yes,
+second_pneum_prob,p_s,p[s],rat-flea,probability of developing secondary pneumonic plague,probability,,,,,
+pneum_trans,\beta_p,beta[p],pneumonic,pneumonic plague transmission rate,1/day,,,beta_I,,
+pneum_incub,1/\sigma_p,1/sigma[p],pneumonic,pneumonic plague mean incubation period,days,,,,,
+pneum_inf_period,1/\gamma_p,1/gamma[p],pneumonic,pneumonic plague mean infectious period,days,,,,,
+louse_to_human_trans,\beta_l,beta[l],louse,human-ectoparasite to human transmission rate,1/day,,,,,
+human_to_louse_trans,\beta_h,beta[h],louse,human to human-ectoparasite transmission rate,1/day,,,,,
+louse_growth,r_l,r[l],louse,human-ectoparasite growth rate,1/day,,,,,
+louse_index,K_l,K[l],louse,human-ectoparasite carrying capacity per person,lice/person,,,,,
+louse_inf_period,1/\gamma_l,1/gamma[l],louse,human-ectoparasite mean infectious period,days,,,,,

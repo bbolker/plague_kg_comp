@@ -14,10 +14,12 @@ pkgs <- c(
   , "future"
   , "glue"         ## yersinia import
   , "here"
+  , "latex2exp"    ## LaTeX labels -> plotmath
   , "Matrix"       ## yersinia import
   , "patchwork"
   , "progressr"
   , "remotes"
+  , "tikzDevice"   ## LaTeX graphics output
   , "rlang"        ## yersinia import
   , "tidyverse"
   , "withr"        ## yersinia import
