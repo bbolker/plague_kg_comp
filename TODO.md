@@ -53,9 +53,6 @@
 ### 1b. yersinia parameter sets
 
 - [ ] Fix in yersinia (`add_kg` branch, then upstream):
-  - The `didelot` scenario has `m_h = 0.0556` (1/18 per day). This
-    copies an error in Didelot et al.'s Table 2. Their text and human
-    R0 give gamma_H = 1/8 per day (`m_h = 0.125`).
   - `prior_default()` for r_r, d_r, r_h and d_h is Uniform(1e-4, 0.1)
     per day. That puts almost all its mass 1–2 orders of magnitude
     above every scenario value.

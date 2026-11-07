@@ -98,8 +98,9 @@ kable(out, na = "")
    excluded by Park et al.). KG used 14 days. Didelot et al. used
    **8 days**: their text and their human $R_0$ give
    $\gamma_H = 1/8$, while their Table 2 says 1/18, which is an error.
-   yersinia's `didelot` scenario copies the Table 2 error
-   (`m_h = 0.0556`, 18 days).
+   yersinia's `didelot` scenario had copied the Table 2 error
+   (`m_h = 0.0556`, 18 days). It is now fixed on the `add_kg` branch
+   (`m_h = 0.125`, commit d7ea0d5).
 5. **Case fatality.** Survival of 0.1 (KG, Didelot and most yersinia
    scenarios) is within the literature range of 0 (Eyam) to 0.34 (US
    1900–2012, partly treated cases).
