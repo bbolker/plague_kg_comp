@@ -2,46 +2,35 @@
 
 ## Setup / bibliography
 
-- [ ] Add references to `plague_kg_comp.bib` from
-      `~/projects/louseplague/doc/plague.bib` as they're needed,
-      especially the sources behind Park's parameter table (Table
-      `tab:param` in `doc/plague.Rnw`).
-- [ ] The `keeling-gilligan.yaml` scenario in yersinia cites KG
-      *Nature* 2000 (`keeling2000metapopulation`), but its R0 equation
-      ("p. 2226") comes from KG *Proc R Soc B* 2000
-      (`keeling2000bubonic`). Work out which parameters come from which
-      paper, and fix the citation upstream if appropriate.
+- [ ] Fix the citation upstream: the `keeling-gilligan.yaml` scenario in
+      yersinia cites KG *Nature* 2000 (`keeling2000metapopulation`), but
+      its R0 equation ("p. 2226") comes from KG *Proc R Soc B* 2000
+      (`keeling2000bubonic`).
 
 ## 1. Parameter comparisons and prior distributions
 
 ### 1a. Keeling–Gilligan parameters
 
-- [x] Tabulate the parameters of both KG 2000 papers, with units, and
-      convert everything to per-day rates (`data/kg_params.csv`,
-      `data/kg_a_lower_bounds.csv`, `R/kg_params.R`; see `data/README.md`).
 - [ ] Remaining KG material to tabulate: the cellular automaton
       transition probabilities (Proc R Soc B Table 3) and the
       sensitivity results (Fig. 3).
 - [ ] The annual mean of KG's seasonal K_F, computed from their stated
       range (3.29 to 11.17), is 6.64 rather than the stated 6.57.
       Probably a rounding issue in the range; check.
-- [ ] Note which values are measured, which are assumed and which are
-      tuned (e.g. Park et al. rejected KG's rat infectious period as
-      implausible).
 - [ ] Go back to the sources cited in the caption of Proc R Soc B
       Table 1 (the parameters marked * there) and recover uncertainty
       (ranges, CIs, sample sizes) for parameters that aren't yet in
       Park's compendium. Add the sources to the bib and the values to
       the tidy parameter table (1c).
 
-      | Source (KG Table 1 ref.) | Parameters |
-      |---|---|
-      | 1. Buckle & Smith (eds) 1994, *Rodent Pests and Their Control* (Oxford UP) | r_R, d_R |
-      | 2. Hirst 1938, "Plague", *Brit. Encyc. Med. Prac.* 9:675–698 | p, g_R, K_F |
-      | 3. Wheeler & Douglas 1945, *J. Infect. Dis.* 77:1–12 | β_R |
-      | 4. Macchiavello 1954, *J. Trop. Med. Hyg.* 57:1–68 | β_R |
-      | 5. Hinnebusch, Gage & Schwan 1998, *Am. J. Trop. Med. Hyg.* | β_R |
-      | 6. Bacot 1915, *J. Hyg.* (Plague Suppl.) | d_F |
+      | Source (KG Table 1 ref.) | bibkey | Parameters | Access |
+      |---|---|---|---|
+      | 1. Buckle & Smith (eds) 1994 | `buckle1994rodent` | r_R, d_R | book (CAB International, not OUP as KG say) |
+      | 2. Hirst 1938 | `hirst1938plague` | p, g_R, K_F | McMaster print only (below) |
+      | 3. Wheeler & Douglas 1945 | `wheeler1945sylvatic` | β_R | doi:10.1093/infdis/77.1.1 |
+      | 4. Macchiavello 1954 | `macchiavello1954reservoirs` | β_R | 12-part serial in *J. Trop. Med. Hyg.* 57: 3–298 (KG cite pp. 1–68) |
+      | 5. Hinnebusch, Gage & Schwan 1998 | `hinnebusch1998estimation` | β_R | doi:10.4269/ajtmh.1998.58.562 |
+      | 6. Bacot 1915 | `bacot1915observations` | d_F | free: <https://pmc.ncbi.nlm.nih.gov/articles/PMC2206740/> |
 
       Hirst (1938): no free online copy found as of 2026-11-07. The
       encyclopaedia (ed. Rolleston, Butterworth) is partly scanned on
@@ -63,12 +52,6 @@
 
 ### 1b. yersinia parameter sets
 
-- [x] Tabulate the `historical`, `keeling-gilligan`, `didelot`,
-      `modern-estimates` and `defaults` scenarios (`inst/scenarios/`)
-      side by side, along with `prior_default()` and
-      `plague_fit_prior()`, and compare them with the literature, KG and
-      Didelot et al. values (`R/yersinia_params.R`,
-      `data/didelot_params.csv`, `notes/param_comparison.qmd`).
 - [ ] Fix in yersinia (`add_kg` branch, then upstream):
   - The `didelot` scenario has `m_h = 0.0556` (1/18 per day). This
     copies an error in Didelot et al.'s Table 2. Their text and human
@@ -94,20 +77,6 @@
 
 ### 1c. Park's review of parameter values
 
-- [x] Import Park's compendium (`louseplague/data/parameter.R`) and
-      merge it with the KG values (`R/params_merge.R` →
-      `data/params_combined.csv`).
-- [x] Changes to the format of Park's compendium:
-  - `data/park_params.csv` is now the canonical source, edited by hand;
-    `parameter.R` is retired for this project.
-  - Quantities are stored as reported. Gani & Leach are `mean_sd` with
-    n; Tollenaere et al. are `mean_se`. The CIs are derived in
-    `R/params_merge.R`.
-  - Every study has a `bibkey`, and the entries are in
-    `plague_kg_comp.bib`.
-  - Added `host`, `vector` and `location` columns, filled in from Park's
-    comments and the reference titles, plus `orig_value`/`orig_units`
-    for converted values and an empty `page` column.
 - [ ] Fill in `page` (and check `host`/`vector`/`location`) as the
       sources are read. Resolve Park's open questions:
   - whether Tollenaere et al. report SE or SD;
@@ -116,12 +85,20 @@
     actual human population;
   - the meaning of Park's 'i5, i6, 17' comment on Tollenaere's
     recovery probabilities.
-- [ ] The overlap between KG and Park shows large disagreements:
+- [ ] The overlap between KG and Park shows large disagreements (see
+      `notes/param_comparison.qmd`):
   - free-flea survival: KG 36.5 days (citing Bacot 1915) vs. 1–6 days
-    (Bacot & Martin 1924);
-  - rat infectious period: KG 18.25 days vs. 3–9 days;
+    (Bacot & Martin 1924). Didelot et al. also call KG's value
+    unrealistic and estimate 3.7 [1.2, 8.6] days for the carcass
+    infectious period;
+  - rat infectious period: KG 18.25 days (a *chosen* value, later
+    adopted by Didelot et al. and yersinia) vs. 2–11 days;
   - rat recovery probability: KG 0.02 vs. 0.09–0.17.
-  Look at what Bacot 1915 actually reports.
+
+  Still to do: look at what Bacot 1915 actually reports
+  (`bacot1915observations`, *J. Hyg.* 14, Plague Suppl. IV: 770–773;
+  free at <https://pmc.ncbi.nlm.nih.gov/articles/PMC2206740/>; save as
+  `papers/bacot1915.pdf`).
 - [ ] Reproduce the louseplague priors with the method in
       `doc/plague.Rnw`:
   - fit independent Gamma/Beta priors whose high-density region covers
@@ -136,9 +113,6 @@
       range or CI) as interval-censored or measurement-error data and
       fit a distribution by ML or a hierarchical model, rather than
       matching quantiles by eye.
-- [ ] Map parameter names and definitions across KG, yersinia and
-      louseplague (e.g. rate vs. mean duration, per-rat flea index vs.
-      total, carcass vs. free-flea pools).
 - [ ] (later) Check and extend Park's extraction with a fresh
       literature search, adding new sources to the bib.
 
@@ -207,7 +181,9 @@
 ### Single-patch dynamics
 
 - [ ] Derive R0 for each model; check how parameters map between models
-      when R0 is matched.
+      when R0 is matched. So far we have KG's R0 (3.09, in
+      `R/kg_params.R`) and Didelot et al.'s R0 (2.85 [1.82, 3.95], in
+      `data/didelot_params.csv`).
 - [ ] Compare epidemic curves: peak timing, peak size, final size, rat
       and human mortality.
 - [ ] Compare endemic equilibria and their stability (damped

@@ -8,7 +8,7 @@ m_R,rat,1/(rat infectious period),20,,,1/yr,chosen,,,m_r,infectious period about
 g_R,rat,probability that an infected rat recovers,0.02,,,probability,estimated,Hirst 1938,Hirst 1938,g_r,
 a,flea,flea searching efficiency,0.004,,,1/rats,fundamental,,,rho,yersinia rho = a*K_R; R0 > 1 iff a*K_R > 0.39 (Proc R Soc B §6); lower bounds in kg_a_lower_bounds.csv; Proc R Soc B Fig. 4 varies a from 0.001 to 0.016
 r_F,flea,flea reproductive rate,20,,,1/yr,chosen,,,,no yersinia equivalent
-d_F,flea,death rate of free fleas,10,,,1/yr,estimated,Bacot 1915,Bacot 1915,delta_R,yersinia keeling-gilligan scenario maps delta_R = d_F; KG's citation details for Bacot look garbled (J. Hyg. vol. 6 is 1906)
+d_F,flea,death rate of free fleas,10,,,1/yr,estimated,Bacot 1915,Bacot 1915,delta_R,yersinia keeling-gilligan scenario maps delta_R = d_F; KG cite Bacot 1915 as J. Hyg. 6: 770-773; it is J. Hyg. 14 (Plague Suppl. IV): 770-773 (bacot1915observations)
 K_F,flea,flea carrying capacity per rat (flea index),6.57,3.29,11.17,fleas/rat,estimated,Hirst 1938,Hirst 1938,,Proc R Soc B: seasonal K_F = k_F*(1+kappa_F)^sin(2*pi*season) ranging 3.29 to 11.17 with mean 6.57; Nature: constant 6.57
 mu_R,spatial,rat movement rate between neighbouring subpopulations,0.03,,,1/yr,chosen,,Methods text,mu_r,
 mu_F,spatial,flea movement rate between neighbouring subpopulations,0.008,,,1/yr,chosen,,Methods text,,
