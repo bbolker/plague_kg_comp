@@ -113,7 +113,8 @@
       single-patch and metapop versions, and a scenario file with the
       original KG flea parameters. Consider a PR upstream once it's stable.
 - [ ] In the `add_kg` model, add a switch for where rat density
-      dependence acts.
+      dependence acts. The full analysis so far is in
+      `notes/density_dependence.qmd`, with code in `R/waning.R`.
   - KG as written: births at r_R, and density-dependent mortality
     r_R T_R/K_R on S_R and R_R (but not I_R). Resistance wanes at the
     constant rate r_R(1−p).

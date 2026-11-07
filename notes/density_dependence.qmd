@@ -1,0 +1,175 @@
+---
+title: "Where does density dependence act? Waning of inherited resistance in the Keeling–Gilligan model"
+date: 2026-11-07
+format:
+  html:
+    embed-resources: true
+bibliography: ../plague_kg_comp.bib
+execute:
+  echo: false
+---
+
+```{r setup}
+#| message: false
+source("../R/waning.R")
+library(knitr)
+```
+
+## KG's rat equations
+
+The rat equations in @keeling2000bubonic [eq. 2] are the same as those
+in the Methods section of @keeling2000metapopulation:
+
+$$
+\begin{aligned}
+\frac{dS_R}{dt} &= r_R S_R\left(1 - \frac{T_R}{K_R}\right) + r_R R_R(1-p) - d_R S_R
+   - \beta_R \frac{S_R}{T_R} F\left[1-e^{-aT_R}\right],\\
+\frac{dI_R}{dt} &= \beta_R \frac{S_R}{T_R} F\left[1-e^{-aT_R}\right] - (d_R + m_R) I_R,\\
+\frac{dR_R}{dt} &= r_R R_R\left(p - \frac{T_R}{K_R}\right) + m_R g_R I_R - d_R R_R,
+\end{aligned}
+$$
+
+where $T_R = S_R + I_R + R_R$. The parameters are $r_R = 5$/yr,
+$d_R = 0.2$/yr, $K_R = 2500$ and $p = 0.975$.
+
+The term that looks odd is the recruitment of susceptibles born to
+resistant parents, $r_R R_R(1-p)$. It has no density-dependent factor.
+The density-dependent term $-r_R R_R T_R/K_R$ is charged entirely to
+$R_R$.
+
+Neither paper comments on this. @keeling2000bubonic only says that
+"both susceptible and resistant rats breed with a net reproductive rate
+of $r_R$ and a carrying capacity $K_R$; however, a proportion $p$ of the
+offspring inherit resistance". @keeling2000metapopulation adds that "in
+the absence of plague, the rat population experiences logistic growth,
+with slowly waning resistance to the disease at the population level
+governed by the parameter $p$".
+
+## Two readings
+
+**KG as written: density-dependent mortality.** Regroup the terms:
+
+- births at the full rate $r_R$. $S_R$ offspring go to $S$. $R_R$
+  offspring are split $p : (1-p)$ between $R$ and $S$.
+- density-dependent mortality at per-capita rate $r_R T_R/K_R$ on $S_R$
+  and $R_R$, but not on $I_R$.
+
+On this reading the equations are internally consistent. The total
+uninfected population $U = S_R + R_R$ still grows logistically.
+
+**Density-dependent recruitment.** Births happen at per-capita rate
+$b = r_R(1 - T_R/K_R)$, split as above. This is what the yersinia
+stochastic model does (`inst/odin/plague_stochastic_humans.R`). It also
+multiplies resistant fecundity by $\iota = 0.75$, which KG don't have.
+
+With no disease, $U$ follows the same trajectory under both readings.
+They differ only in how $U$ is split between $S$ and $R$.
+
+## Dynamics of the resistant fraction
+
+Let $f = R/(S+R)$ be the resistant fraction. With no disease, both
+readings give
+
+$$
+f' = -(1-p)\, b(t)\, f ,
+$$
+
+where $b(t)$ is the per-capita birth rate. Each round of births leaks a
+fraction $1-p$ of the resistant parents' offspring into $S$.
+
+- **KG:** $b = r_R$, so $f$ decays at the constant rate $r_R(1-p)$
+  (0.125/yr, half-life about 5.5 yr) whatever the population size.
+- **Recruitment:** $b = r_R(1 - T/K)$. Since $U' = (b - d)U$, we have
+  $\int b\,dt = \ln(T_\text{end}/T_0) + d\tau$ over an interval of
+  length $\tau$, so
+
+  $$
+  \frac{f_\text{end}}{f_0} = \left(\frac{T_0}{T_\text{end}}\right)^{1-p} e^{-(1-p)\, d\, \tau}.
+  $$
+
+At the disease-free equilibrium $T^* = K(1 - d/r)$, the two readings
+wane at very different rates:
+
+| Where density dependence acts | Waning rate at $T^*$ | KG parameters |
+|---|---|---|
+| mortality (KG) | <span style="white-space: nowrap;">$r_R(1-p)$</span> | 0.125/yr (half-life ≈ 5.5 yr) |
+| recruitment | <span style="white-space: nowrap;">$d_R(1-p)$</span> | 0.005/yr (half-life ≈ 140 yr) |
+
+: Waning of resistance at the disease-free equilibrium.
+
+The two readings also imply very different rat lifespans at $K$: about
+$1/r_R \approx 2.4$ months (KG) versus $1/d_R = 5$ years (recruitment).
+
+### The equilibrium comparison is misleading on its own
+
+After a crash, $T \ll K$, so births are temporarily much faster under
+the recruitment reading, which dilutes resistance while the population
+regrows. But:
+
+1. **The dilution is logarithmic in the depth of the crash and scaled by
+   $1-p$.** With $p = 0.975$, even a 1000-fold crash only dilutes
+   resistance by a factor of
+   <span style="white-space: nowrap;">$1000^{0.025} \approx 1.19$.</span>
+2. **The recruitment reading can never wane faster than KG along the
+   same trajectory.** Since $r_R(1 - T/K) \le r_R$ at all times, the
+   post-crash burst of births only brings it up toward the rate KG use
+   all the time.
+3. **Regrowth takes about a year at $r_R = 5$/yr.** During regrowth the
+   two readings dilute resistance by similar amounts. They diverge in
+   the years the population then spends near $K$, which dominate the
+   inter-epidemic interval with KG's parameters.
+4. **When $p$ is far from 1, regrowth dilution is large.** With
+   $p = 0.5$, a 100-fold crash cuts resistance to about 10% through
+   regrowth alone. This is probably why the yersinia metapopulation
+   vignette (which uses the recruitment reading) needed $p = 0.5$ to
+   get KG-like persistence.
+
+### Numerical check
+
+The table below gives the resistant fraction $f$ after a crash to a
+fraction of $T^*$, starting with all survivors resistant ($f_0 = 1$).
+It uses KG's demographic parameters and comes from `R/waning.R`. The
+last column is the prediction for regrowth dilution alone under the
+recruitment reading, (crash)$^{1-p}$.
+
+```{r waning-table}
+res <- waning_grid()
+wide <- reshape(res, idvar = c("p", "crash", "time"),
+                timevar = "version", direction = "wide")
+names(wide) <- sub("^f\\.", "", names(wide))
+wide$`regrowth pred.` <- regrowth_dilution(wide$p, wide$crash)
+wide$`regrowth pred.`[wide$time != max(wide$time)] <- NA
+kable(wide, digits = 3, row.names = FALSE,
+      col.names = c("p", "crash (× T*)", "t (yr)", "KG", "recruitment",
+                    "regrowth pred."))
+```
+
+## Caveats
+
+These results are for the disease-free dynamics only. With plague
+present:
+
+- epidemics selectively remove susceptibles, so $f_0$ after an epidemic
+  is high but below 1;
+- survivors of infection (fraction $g_R$) join $R$;
+- low-level ongoing infection keeps pushing $f$ up.
+
+Comparing the two readings properly needs the full model over complete
+epidemic → crash → recovery → inter-epidemic cycles, across a range of
+$p$. See the corresponding item in `TODO.md`. The location of density
+dependence is a candidate for the most important parameter for
+metapopulation persistence.
+
+## Related problems in yersinia
+
+- The deterministic KG reference vignette
+  (`vignettes/reference-deterministic-models.Rmd`) copies KG's $S$/$R$
+  equations exactly, but its flea-index equation leaves out $d_F$ (it
+  uses $F[1-e^{-aT}]/T$ instead of $d_F F[1-e^{-aT}]/T$).
+- The parameter documentation (`inst/explainer/build.R`) says values of
+  $p$ near 1 "prevent the resistance trait from washing out". In KG,
+  $1-p$ is what sets the rate at which resistance washes out.
+  @keeling2000bubonic [Table 1] also cite Hirst (1938) for $p$, whereas
+  the yersinia documentation says it has "no empirical basis".
+
+## References

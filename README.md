@@ -75,6 +75,9 @@ doesn't exist.
 - `data/`: parameter tables (KG, yersinia scenarios, Park's
   literature values)
 - `doc/`: write-ups (Quarto)
+- `notes/`: shorter working notes (Quarto), e.g.
+  `notes/density_dependence.qmd` on where rat density dependence acts
+  and how fast inherited resistance wanes
 - `figs/`: figures
 - `papers/`: downloaded PDFs for full-text reading. This is
   **gitignored** because the repo is public; don't commit PDFs.
