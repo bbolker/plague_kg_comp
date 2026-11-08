@@ -1,0 +1,69 @@
+---
+title: "Parameter values and prior distributions for plague models"
+date: 2026-11-07
+format:
+  html:
+    embed-resources: true
+bibliography: ../plague_kg_comp.bib
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r setup}
+source(here::here("R", "prior_fig.R"))
+```
+
+These figures reconstruct and extend the prior figure from the
+louseplague project (`figure/prior_fig.R` there), adding the sources
+compiled here. Each panel is one parameter, on the canonical scale in
+`data/param_dict.csv`: durations in days and rates per day.
+
+- **Rows** are sources. From bottom to top: literature values compiled
+  by Park, our own extractions, @keeling2000bubonic,
+  @didelot2017model, and the yersinia scenarios (one cross per
+  scenario).
+- **Colour** shows the source.
+- **Shape** shows the kind of value:
+  - point estimate;
+  - range;
+  - CI, either reported or derived from mean ± SD or SE;
+  - posterior mean with 95% credible interval;
+  - a value fixed (assumed) by a modelling study;
+  - a scenario value;
+  - a *maximum*, i.e. the longest duration observed. A maximum is a
+    bound, not a mean (see `data/README.md`).
+- **Curves** at the bottom of each panel are prior densities, each
+  scaled to the same height. The louseplague priors (Park et al.) are
+  grey solid curves. yersinia's `prior_default()` priors are dashed and
+  its `plague_fit_prior()` priors are dotted. yersinia priors on rates
+  are transformed to durations where needed (e.g. 1/`m_r`).
+
+KG values that don't mean the same thing as the literature parameter
+are left out: KG's search efficiency *a* (vs. Dean et al.'s $s_f$) and
+KG's $\beta_H$ (vs. Dean et al.'s $\beta_b$). The figures are built by
+`make` as `outputs/figs/param_priors_{lit,model}.pdf`. `make tikz`
+writes LaTeX versions.
+
+## Parameters with literature values
+
+The panels cover the 22 parameters in louseplague's figure.
+
+```{r fig-lit, fig.width = 16, fig.height = 15, out.width = "100%"}
+prior_fig("lit")
+```
+
+## Parameters set only by models
+
+KG, Didelot et al. and yersinia specify these parameters, but we have no
+literature values for them yet. They include rat and human demography,
+movement rates, the carcass-model parameters and rat $R_0$. The x axes
+are logarithmic, and zero values are omitted (e.g. the `didelot`
+scenario's `r_r = d_r = 0`).
+
+```{r fig-model, fig.width = 16, fig.height = 8, out.width = "100%"}
+prior_fig("model")
+```
+
+## References

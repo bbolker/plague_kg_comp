@@ -129,8 +129,9 @@
   rather than mean survival, so they need the same care as Bacot 1915
   (`maximum` type). They may also inform the flea incubation and
   infectious periods.
-- [ ] Reproduce the louseplague priors with the method in
-      `doc/plague.Rnw`:
+- [ ] Reproduce the louseplague priors (now in
+      `data/louseplague_priors.csv` and plotted in
+      `notes/param_priors.qmd`) with the method in `doc/plague.Rnw`:
   - fit independent Gamma/Beta priors whose high-density region covers
     most of the reported values;
   - convert SE/SD to approximate normal CIs;
@@ -145,6 +146,31 @@
       matching quantiles by eye.
 - [ ] (later) Check and extend Park's extraction with a fresh
       literature search, adding new sources to the bib.
+
+### 1d. Parameter/prior figures (`R/prior_fig.R`)
+
+- [ ] (later) Graphics tweaks for `outputs/figs/param_priors_*`:
+  - HTML version with **ggiraph**, with hover text giving the full
+    reference for each point or interval (study, bibkey, notes), e.g.
+    in `notes/param_priors.qmd`. Add ggiraph to `get_pkgs.R`.
+  - For the other formats (PDF, PNG, tikz), shorten the row labels to
+    abbreviated references: the first 4 letters of the first author's
+    surname, plus the first 4 letters of the second author's surname
+    if there are exactly two authors, or `+` if there are three or
+    more; then the year. Examples: `Baco1915`, `KeelGill2000`,
+    `Toll+2010`. Generate these from the bib entries (via `bibkey`),
+    not by hand. Decide how to handle corporate authors (e.g. the
+    Indian Plague Commission) and the "yersinia scenarios" row.
+  - Consider alternatives to the current vertical dodging of several
+    values within one row (`position_dodge`, which looks like
+    jittering, e.g. Tollenaere et al.'s four CIs or the yersinia
+    scenarios):
+    - one sub-row per value, labelled (e.g. `Toll+2010a`, or by
+      scenario name or experimental condition);
+    - deterministic offsets ordered by value (no random component);
+    - a beeswarm layout (ggbeeswarm) for many point values;
+    - for yersinia, small labelled ticks or scenario-specific shapes
+      instead of five identical crosses.
 
 ## 2. Comparing model types
 

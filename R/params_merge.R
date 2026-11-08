@@ -21,9 +21,9 @@ suppressPackageStartupMessages({
     library(purrr)
 })
 
-source("R/yersinia_params.R")
+source(here::here("R", "yersinia_params.R"))
 
-read_dict <- function(file = "data/param_dict.csv") {
+read_dict <- function(file = here::here("data", "param_dict.csv")) {
     read_csv(file, show_col_types = FALSE)
 }
 
@@ -70,7 +70,7 @@ lit_long <- function(file, source_set, dict = read_dict()) {
 ##' KG parameters (data/kg_params.csv) in the common long format.
 ##' KG values are point values; the seasonal range of K_F is recorded in
 ##' notes, not as lwr/upr (which denote uncertainty).
-kg_long <- function(kg = read_csv("data/kg_params.csv", show_col_types = FALSE),
+kg_long <- function(kg = read_csv(here::here("data", "kg_params.csv"), show_col_types = FALSE),
                     dict = read_dict()) {
     kg |>
         filter(category != "setup") |>
@@ -93,9 +93,9 @@ kg_long <- function(kg = read_csv("data/kg_params.csv", show_col_types = FALSE),
 
 ##' Combine all sources
 combine_params <- function(kg = kg_long(),
-                           park = lit_long("data/park_params.csv", "park"),
-                           didelot = lit_long("data/didelot_params.csv", "didelot"),
-                           lit = lit_long("data/lit_params.csv", "lit"),
+                           park = lit_long(here::here("data", "park_params.csv"), "park"),
+                           didelot = lit_long(here::here("data", "didelot_params.csv"), "didelot"),
+                           lit = lit_long(here::here("data", "lit_params.csv"), "lit"),
                            yersinia = yersinia_long()) {
     cols <- c("param", "label", "source_set", "id", "study", "bibkey",
               "host", "vector", "location",
@@ -109,6 +109,6 @@ combine_params <- function(kg = kg_long(),
 
 if (sys.nframe() == 0) {
     out <- combine_params()
-    write_csv(out, "data/params_combined.csv", na = "")
+    write_csv(out, here::here("data", "params_combined.csv"), na = "")
     message("wrote ", nrow(out), " rows to data/params_combined.csv")
 }

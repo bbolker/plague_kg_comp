@@ -15,7 +15,7 @@ suppressPackageStartupMessages({
     library(tidyr)
 })
 
-yersinia_dict <- function(dict = read_csv("data/param_dict.csv", show_col_types = FALSE)) {
+yersinia_dict <- function(dict = read_csv(here::here("data", "param_dict.csv"), show_col_types = FALSE)) {
     dict |>
         filter(!is.na(yersinia_name), !is.na(yersinia_transform)) |>
         select(param, label, units, yersinia_name, yersinia_transform)

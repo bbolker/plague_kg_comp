@@ -91,7 +91,11 @@ also formats the references. Edit `README.qmd`, never `README.md`.
     and how fast inherited resistance wanes
   - `notes/param_comparison.qmd`: literature (Park) vs. KG, Didelot
     et al. and yersinia parameter values and priors
-- `figs/`: figures
+  - `notes/param_priors.qmd`: figures of all parameter values with the
+    louseplague and yersinia prior densities (extends louseplague's
+    prior figure)
+- `outputs/figs/`: rendered figures (`make`; `make tikz` for LaTeX
+  versions). PDFs and `.tex` files are gitignored; PNGs are not.
 - `papers/`: downloaded PDFs for full-text reading. This is
   **gitignored** because the repo is public; don't commit PDFs.
 

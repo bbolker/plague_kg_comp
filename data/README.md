@@ -12,6 +12,7 @@ values from different sources can be merged with tidyverse.
 | `kg_a_lower_bounds.csv` | KG *Proc R Soc B* Table 2: lower bounds on flea searching efficiency $a$ from densities of wild rodents with plague outbreaks | by hand |
 | `park_params.csv` | Daniel Park's literature compendium, with quantities as reported. This is the **canonical** version, edited by hand; it replaces `louseplague/data/parameter.R` | by hand |
 | `didelot_params.csv` | Didelot et al. (2017), Cairo 1801: fixed values and posterior means with 95% CrIs. Same format as `park_params.csv` | by hand |
+| `louseplague_priors.csv` | the priors used in louseplague (Park et al.; Gamma/Beta), by parameter | by hand, from louseplague `figure/prior_fig.R` |
 | `lit_params.csv` | our own extractions from the literature (e.g. Bacot 1915). Same format as `park_params.csv` | by hand |
 | `params_combined.csv` | KG, Park, Didelot and yersinia values (scenarios and default priors) in one table | `make data/params_combined.csv` (`R/params_merge.R`, `R/yersinia_params.R`) |
 

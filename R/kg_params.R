@@ -2,7 +2,7 @@
 ## quantities. Sources: data/kg_params.csv (Proc R Soc B Table 1 + Nature
 ## Table 1/Methods) and data/kg_a_lower_bounds.csv (Proc R Soc B Table 2).
 
-data_dir <- if (dir.exists("data")) "data" else file.path("..", "data")
+data_dir <- here::here("data")
 
 ##' Read the KG parameter table, adding per-day values for rates
 read_kg_params <- function(file = file.path(data_dir, "kg_params.csv")) {

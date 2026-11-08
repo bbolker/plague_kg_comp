@@ -1,0 +1,23 @@
+param,family,shape,scale,shape1,shape2,units,source,notes
+pneum_incub,Gamma,6,0.5,,,days,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+pneum_inf_period,Gamma,20,0.11,,,days,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+rat_human_ratio,Gamma,5,0.2,,,ratio,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+inf_period_rat,Gamma,15,0.4,,,days,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+recov_prob_rat,Beta,,,3,27,probability,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+bubonic_incub,Gamma,10,0.4,,,days,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+bubonic_inf_period,Gamma,40,0.25,,,days,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+bubonic_recov_prob,Beta,,,5,20,probability,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+second_pneum_prob,Beta,,,2,18,probability,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+flea_search,Gamma,4,0.5,,,depends on model scaling,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+flea_growth,Gamma,10,0.005,,,1/day,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+flea_index,Gamma,5,1.4,,,fleas/rat,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+flea_incub,Gamma,20,0.8,,,days,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+flea_free_survival,Gamma,4,1,,,days,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+louse_growth,Gamma,10,0.01,,,1/day,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+louse_index,Gamma,3,12,,,lice/person,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+louse_inf_period,Gamma,20,0.125,,,days,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+pneum_trans,Gamma,2,0.25,,,1/day,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+flea_to_rat_trans,Gamma,2,0.25,,,1/day,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+flea_to_human_trans,Gamma,2,0.05,,,1/day,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+louse_to_human_trans,Gamma,2,0.025,,,1/day,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param
+human_to_louse_trans,Gamma,2,0.25,,,1/day,Park et al. (louseplague),from louseplague figure/prior_fig.R (prior_used) and doc/plague.Rnw Table tab:param

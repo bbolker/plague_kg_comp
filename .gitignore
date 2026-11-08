@@ -8,3 +8,5 @@
 *~
 .quarto/
 papers/
+## rendered tikz figures (regenerate with make tikz)
+outputs/figs/*.tex
