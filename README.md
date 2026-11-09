@@ -137,7 +137,7 @@ Biological Sciences* 267 (1458): 2219–30.
 <div id="ref-keeling2000metapopulation" class="csl-entry">
 
 ———. 2000b. “Metapopulation Dynamics of Bubonic Plague.” *Nature* 407
-(6806): 903.
+(6806): 903–6. <https://doi.org/10.1038/35038073>.
 
 </div>
 

@@ -190,6 +190,21 @@
 
 ### 1d. Parameter/prior figures (`R/prior_fig.R`)
 
+- [ ] **Keep supporting evidence out of the prior figures.** Adding the
+      Wheeler & Douglas and Hinnebusch values pulled five new panels into
+      `param_priors_lit*`, and three of them don't belong there:
+      `vector_efficiency`, `flea_infect_prev` and `flea_block_prev` are
+      evidence *about* `beta_r` (see `notes/lit_summary.qmd`), not model
+      parameters that need priors. `flea_block_prev` is the worst case: a
+      single value of 0, which gives a degenerate axis of -0.05 to 0.05.
+  - Suggested fix: add an `evidence` value to `param_modes`, set those
+    three dictionary rows to it, and have `subset_dict()` drop
+    evidence-mode parameters unless `include_modes` names them.
+  - `flea_incub`, `flea_infective_period` and `flea_lifespan` are real
+    quantities and should stay.
+  - While there: the long multi-line panel titles (e.g. vector efficiency)
+    overflow and collide with the row labels on the left.
+
 - [ ] (later) Graphics tweaks for `outputs/figs/param_priors_*`:
   - HTML version with **ggiraph**, with hover text giving the full
     reference for each point or interval (study, bibkey, notes), e.g.
