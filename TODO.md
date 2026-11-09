@@ -146,6 +146,32 @@
       matching quantiles by eye.
 - [ ] (later) Check and extend Park's extraction with a fresh
       literature search, adding new sources to the bib.
+- [ ] Find empirical sources for the parameters that are poorly
+      supported. Their louseplague priors rest only on model
+      assumptions or on a single study, so the prior width is Park's
+      judgement. Start with these:
+  - **No empirical value, only model choices:**
+    - flea reproductive rate r_f: the only value is KG's r_F = 20/yr,
+      which KG "chose within biologically realistic bounds" (no
+      source in Table 1). Park's prior is centred on it. Look at
+      *X. cheopis* life-table studies (development time, fecundity,
+      temperature dependence);
+    - flea-to-rat transmission β_r: Dean et al.'s assumed range (0–1)
+      plus KG's β_R = 4.7/yr. KG mark β_R as estimated from Wheeler &
+      Douglas (1945), Macchiavello (1954) and Hinnebusch et al.
+      (1998); check what those actually measure;
+    - flea searching efficiency s_f: Dean et al.'s assumed value 3,
+      plus KG's a = 0.004/rat on a different scale (left out of the
+      figure). See KG Proc R Soc B §6 for the bounds on a;
+    - transmission rates set only by Dean et al.'s assumed ranges:
+      flea-to-human β_b (KG's β_H isn't comparable), louse-to-human
+      β_l and human-to-louse β_h; pneumonic β_p also has a Didelot et
+      al. posterior.
+  - **One empirical study:** louse growth rate r_l (Evans & Smith
+    1952) and louse infectious period 1/γ_l (Houhamdi et al. 2006).
+  - **Two old or indirect studies:** rat-to-human ratio (Boelter 1909;
+    Davis & Fales 1949) and rat recovery probability g_r (Tollenaere
+    et al. 2010, plus KG's g_R = 0.02, from Hirst 1938).
 
 ### 1d. Parameter/prior figures (`R/prior_fig.R`)
 

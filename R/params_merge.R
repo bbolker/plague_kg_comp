@@ -101,7 +101,7 @@ combine_params <- function(kg = kg_long(),
               "host", "vector", "location",
               "estimate", "lwr", "upr", "interval", "sd", "se", "n", "type",
               "units", "basis", "orig_symbol", "orig_value", "orig_units",
-              "page", "notes")
+              "page", "notes", "borrowed_from")
     bind_rows(kg, park, didelot, lit, yersinia) |>
         select(any_of(cols)) |>
         arrange(param, source_set, id)

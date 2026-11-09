@@ -29,10 +29,10 @@ daniel_1985,bubonic_recov_prob,Daniel (1985),daniel1985story,human,,Eyam,0,,,,,,
 josko_2004,second_pneum_prob,Josko (2004),josko2004yersinia,human,,,,0.05,0.15,,,,range,,,,
 alsofrom_1981,second_pneum_prob,Alsofrom (1981),alsofrom1981radiographic,human,,"New Mexico, 1975-1980",0.21,,,,,42,point estimate,,,,n = 42 proved cases (from the title)
 guernier_2014,flea_index,Guernier et al. (2014),guernier2014fleas,Rattus rattus,,Reunion Island,3.15,,,,,40,point estimate,126,fleas,,126 fleas on 40 rats; Park: 'specific flea index they report appear to be wrong??'
-carrion_1932_1,flea_index,Carrion and Arturo (1932),carrion1932final,,Xenopsylla cheopis (mostly),"San Juan, Puerto Rico",13.9,,,,,,point estimate,,,,Park's comment: 'Mostly X. cheopis on Mus spp.'
-carrion_1932_2,flea_index,Carrion and Arturo (1932),carrion1932final,,Xenopsylla cheopis (mostly),"San Juan, Puerto Rico",2.4,,,,,,point estimate,,,,Park's comment: 'Mostly X. cheopis on Mus spp.'
-carrion_1932_3,flea_index,Carrion and Arturo (1932),carrion1932final,,Xenopsylla cheopis (mostly),"San Juan, Puerto Rico",5.8,,,,,,point estimate,,,,Park's comment: 'Mostly X. cheopis on Mus spp.'
-carrion_1932_4,flea_index,Carrion and Arturo (1932),carrion1932final,,Xenopsylla cheopis (mostly),"San Juan, Puerto Rico",3.5,,,,,,point estimate,,,,Park's comment: 'Mostly X. cheopis on Mus spp.'
+carrion_1932_1,flea_index,Carrión (1932),carrion1932final,,Xenopsylla cheopis (mostly),"San Juan, Puerto Rico",13.9,,,,,,point estimate,,,,Park's comment: 'Mostly X. cheopis on Mus spp.'
+carrion_1932_2,flea_index,Carrión (1932),carrion1932final,,Xenopsylla cheopis (mostly),"San Juan, Puerto Rico",2.4,,,,,,point estimate,,,,Park's comment: 'Mostly X. cheopis on Mus spp.'
+carrion_1932_3,flea_index,Carrión (1932),carrion1932final,,Xenopsylla cheopis (mostly),"San Juan, Puerto Rico",5.8,,,,,,point estimate,,,,Park's comment: 'Mostly X. cheopis on Mus spp.'
+carrion_1932_4,flea_index,Carrión (1932),carrion1932final,,Xenopsylla cheopis (mostly),"San Juan, Puerto Rico",3.5,,,,,,point estimate,,,,Park's comment: 'Mostly X. cheopis on Mus spp.'
 engelthaler_2000a,flea_incub,Engelthaler et al. (2000),engelthaler2000quantitative,,,,16.5,15,18,,,,range,,,,
 pollitzer_1952,flea_incub,Pollitzer (1952),pollitzer_plague_1952,,,,,9,26,,,,range,,,,
 bacot_1924_1,flea_free_survival,Bacot and Martin (1924),bacot1924respective,,Xenopsylla cheopis,,6.3333,,,,,,point estimate,152,hours,,different temperature/humidity conditions

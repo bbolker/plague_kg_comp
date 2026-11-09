@@ -2,8 +2,8 @@
 
 .PHONY: all clean tikz
 
-FIGS = $(foreach g,lit model,$(foreach e,pdf png,outputs/figs/param_priors_$(g).$(e)))
-FIG_DEPS = R/prior_fig.R R/prior_densities.R R/yersinia_params.R data/params_combined.csv data/param_dict.csv data/louseplague_priors.csv
+FIGS = $(foreach g,lit model lit_ratflea,$(foreach e,pdf png,outputs/figs/param_priors_$(g).$(e)))
+FIG_DEPS = R/prior_fig.R R/utils.R R/prior_densities.R R/yersinia_params.R data/params_combined.csv data/param_dict.csv data/louseplague_priors.csv
 
 all: README.md data/params_combined.csv $(FIGS)
 

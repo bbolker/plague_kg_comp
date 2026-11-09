@@ -20,10 +20,19 @@ louseplague project (`figure/prior_fig.R` there), adding the sources
 compiled here. Each panel is one parameter, on the canonical scale in
 `data/param_dict.csv`: durations in days and rates per day.
 
+- **Panel titles** give the parameter's description, then its symbol
+  and units.
 - **Rows** are sources. From bottom to top: literature values compiled
-  by Park, our own extractions, @keeling2000bubonic,
-  @didelot2017model, and the yersinia scenarios (one cross per
-  scenario).
+  by Park, our own extractions, @keeling2000bubonic and
+  @didelot2017model. The yersinia scenario values are left out by
+  default ([see below](#yersinia-scenarios)). Rows are labelled with abbreviated references built from
+  the bibliography: the first four letters of the first author's
+  surname, then those of the second author (two authors) or `+` (three
+  or more), then the year, e.g. `KeelGill2000`, `Toll+2010`. The
+  Indian Plague Commission is `IPC1908`.
+- **Several values in one row** are spread vertically, beeswarm-style,
+  only where they would otherwise overlap; an interval moves together
+  with its estimate. The layout is deterministic (no random jitter).
 - **Colour** shows the source.
 - **Shape** shows the kind of value:
   - point estimate;
@@ -31,20 +40,113 @@ compiled here. Each panel is one parameter, on the canonical scale in
   - CI, either reported or derived from mean ± SD or SE;
   - posterior mean with 95% credible interval;
   - a value fixed (assumed) by a modelling study;
-  - a scenario value;
   - a *maximum*, i.e. the longest duration observed. A maximum is a
     bound, not a mean (see `data/README.md`).
 - **Curves** at the bottom of each panel are prior densities, each
-  scaled to the same height. The louseplague priors (Park et al.) are
-  grey solid curves. yersinia's `prior_default()` priors are dashed and
-  its `plague_fit_prior()` priors are dotted. yersinia priors on rates
-  are transformed to durations where needed (e.g. 1/`m_r`).
+  scaled to the same height. The louseplague priors (Park et al., see
+  [below](#louseplague-priors)) are filled grey areas. yersinia's
+  `prior_default()` priors are dashed blue lines and its
+  `plague_fit_prior()` priors are dotted. yersinia priors on rates are
+  transformed to durations where needed (e.g. 1/`m_r`).
 
 KG values that don't mean the same thing as the literature parameter
 are left out: KG's search efficiency *a* (vs. Dean et al.'s $s_f$) and
-KG's $\beta_H$ (vs. Dean et al.'s $\beta_b$). The figures are built by
-`make` as `outputs/figs/param_priors_{lit,model}.pdf`. `make tikz`
-writes LaTeX versions.
+KG's $\beta_H$ (vs. Dean et al.'s $\beta_b$). Values that a study took
+from an earlier model are also left out, since they duplicate the
+original (`borrowed_from` in the data). These are Didelot et al.'s
+fixed rat infectious period (18 days) and human recovery probability
+(0.1), both from KG. The figures are built by
+`make` as `outputs/figs/param_priors_{lit,model,lit_ratflea}.{pdf,png}`.
+`make tikz` writes LaTeX versions. `prior_fig()` can also show a subset
+of parameters by transmission mode (`include_modes`, `exclude_modes`:
+rat-flea, human-ecto, pneumonic) or host/vector (`include_hosts`,
+`exclude_hosts`: rat, human, flea, louse), using the `mode` and `host`
+columns of `data/param_dict.csv`.
+
+### yersinia scenario values {#yersinia-scenarios}
+
+The yersinia package has five parameter sets (`inst/scenarios/*.yaml`,
+all per day, in Didelot's carcass formulation). We leave them out of
+the figures, because the aim is to get as close as possible to primary
+sources:
+
+- `didelot` and `keeling-gilligan` restate @didelot2017model's and
+  KG's values, converted to the carcass model, e.g. ρ = *a*·*K_R* and
+  δ_R = *d_F* for KG. They duplicate rows already in the figures.
+- `historical` and `modern-estimates` cite no specific sources
+  ("historical analysis and paleoepidemiology", "multiple contemporary
+  sources"). Their values look like round-number adjustments of the
+  KG/Didelot values, with qualitative reasons.
+- `defaults` is a curated starting point for fitting. The package's
+  `explainer/parameters.html` gives a short rationale for each value
+  but no references.
+
+`prior_fig(..., scenarios = TRUE)` adds them back, as crosses in a
+"yersinia scenarios" row. yersinia's *prior* curves are still shown.
+
+## How the louseplague priors were derived {#louseplague-priors}
+
+Park et al. describe their method in the louseplague manuscript
+(`doc/plague.Rnw` in that repository, "To construct informative
+priors ..." and Table `tab:param`). The priors themselves are in
+`data/louseplague_priors.csv`.
+
+- Literature values were collected and plotted (the original version of
+  these figures). A prior was then **chosen for each parameter
+  separately**, a Gamma for positive parameters and a Beta for
+  probabilities. Each prior was chosen so that its high-density region
+  contains most of the reported values. The manuscript describes no
+  fitting procedure, so the priors seem to have been chosen by eye.
+- The priors are **independent**, "for convenience", even though some
+  parameters (e.g. transmission rates and infectious periods) are
+  probably correlated.
+- Some values were **left out as implausible** compared with the other
+  studies:
+  - the rat infectious period ($1/\gamma_r$ = 18.25 days) assumed by
+    @keeling2000metapopulation;
+  - the incubation and infectious periods reported by
+    @scott2001biology. The manuscript calls these $1/\sigma_r$ and
+    $1/\gamma_r$, but the Scott & Duncan values in Park's compilation
+    are for human bubonic plague [($1/\sigma_b$]{style="white-space: nowrap;"}
+    and [$1/\gamma_b$)]{style="white-space: nowrap;"}, so those are
+    probably the ones meant.
+- When a parameter has **only one reported value**, the prior spans a
+  "biologically realistic range" around it. For example,
+  @evans1952intrinsic estimated the louse growth rate as 0.111/day
+  (doubling time 6.2 days). The prior's 95% range is 0.05–0.17/day,
+  i.e. doubling times of 4.1–14.5 days.
+- **Rat-to-human ratio:** @didelot2017model and @dean2018human assume
+  one susceptible rat per susceptible human. The prior relaxes this to
+  a Gamma with mean 1 and 95% range of about 0.3–2.
+- **Transmission rates** ($\beta_p$, $\beta_b$, $\beta_r$, $\beta_h$,
+  $\beta_l$): @dean2018human used uniform priors. These are replaced
+  by Gamma priors with the same means and shape 2.
+
+The values in the "only one value" and "relaxed" cases set the location
+of the prior, but its width is a judgement call. The plotted
+literature values therefore don't fully determine these priors.
+
+```{r louseplague-prior-table}
+dict <- readr::read_csv(here::here("data", "param_dict.csv"), show_col_types = FALSE)
+lp <- readr::read_csv(here::here("data", "louseplague_priors.csv"), show_col_types = FALSE)
+lp <- lp[order(match(lp$param, dict$param)), ]
+q <- \(p) ifelse(lp$family == "Gamma",
+                 qgamma(p, shape = lp$shape, scale = lp$scale),
+                 qbeta(p, lp$shape1, lp$shape2))
+fmt <- \(x) format_num(x)
+tab <- data.frame(
+    parameter = dict$description[match(lp$param, dict$param)],
+    symbol = paste0("$", dict$label[match(lp$param, dict$param)], "$"),
+    prior = ifelse(lp$family == "Gamma",
+                   sprintf("Gamma(shape = %s, scale = %s)", lp$shape, lp$scale),
+                   sprintf("Beta(%s, %s)", lp$shape1, lp$shape2)),
+    mean = fmt(ifelse(lp$family == "Gamma", lp$shape * lp$scale,
+                      lp$shape1 / (lp$shape1 + lp$shape2))),
+    `95% range` = paste0(fmt(q(0.025)), "–", fmt(q(0.975))),
+    units = lp$units,
+    check.names = FALSE)
+knitr::kable(tab, caption = "louseplague priors (Park et al.), with means and central 95% ranges.")
+```
 
 ## Parameters with literature values
 
@@ -52,6 +154,15 @@ The panels cover the 22 parameters in louseplague's figure.
 
 ```{r fig-lit, fig.width = 16, fig.height = 15, out.width = "100%"}
 prior_fig("lit")
+```
+
+### Rat and flea parameters only
+
+The same figure without parameters involving humans or lice
+(`exclude_hosts = c("human", "louse")`).
+
+```{r fig-lit-ratflea, fig.width = 16, fig.height = 8, out.width = "100%"}
+prior_fig("lit", exclude_hosts = c("human", "louse"))
 ```
 
 ## Parameters set only by models

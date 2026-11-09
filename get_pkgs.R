@@ -4,6 +4,7 @@ options(repos = c(CRAN = "https://cloud.r-project.org"))
 
 pkgs <- c(
     "bbmle"        ## MLE, e.g. fitting distributions to reported quantiles
+  , "bibtex"       ## parse plague_kg_comp.bib (figure row labels)
   , "cli"          ## yersinia import
   , "checkmate"    ## yersinia import
   , "colorspace"
