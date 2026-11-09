@@ -25,6 +25,28 @@
   | 5. Hinnebusch, Gage & Schwan 1998 | `hinnebusch1998estimation` | β_R | doi:10.4269/ajtmh.1998.58.562 |
   | 6. Bacot 1915 | `bacot1915observations` | d_F | free: <https://pmc.ncbi.nlm.nih.gov/articles/PMC2206740/> |
 
+- [ ] **Digitize Chart 1 of Wheeler & Douglas (1945)** (`pix/wheeler1945_chart1.png`,
+      full paper in `papers/`). The chart gives *per-individual* data for all
+      46 infective fleas (32 *D. montanus*, 14 *X. cheopis*): the day of each
+      transmission (filled square) and the day the flea died (X), on a
+      1-day grid. That is the only individual-level source we have for the
+      flea extrinsic incubation and infective periods, so it would give SDs
+      and the shape of both distributions, not just the mean/min/max the
+      text reports (see `notes/lit_summary.qmd`).
+  - An automated attempt (deskew, axis calibration, per-cell fill fraction)
+    failed to reproduce the paper's published summary statistics: it
+    recovered a pre-infective max of 23 days against the stated 33. The
+    sticking points are the row grid (the scan has ~0.6 degrees of skew and the
+    printed flea-number labels sit a variable distance from their data
+    rows) and adjacent square+X marks merging into one blob.
+  - **Reading it by eye is probably faster than fixing the automation.**
+    Record one row per flea as (species, flea number, transmission days,
+    death day) in a new `data/wheeler1945_chart1.csv`.
+  - Validate any extraction against the four published statistics per
+    species: *X. cheopis* pre-infective mean 16 (6-33), infective period
+    mean 4 (1-18); *D. montanus* pre-infective mean 10 (3-27), infective
+    period mean 5 (1-51).
+
   Hirst (1938): no free online copy found as of 2026-11-07. The
   encyclopaedia (ed. Rolleston, Butterworth) is partly scanned on
   archive.org (Digital Library of India), but vol. IX, which
@@ -252,6 +274,22 @@
 - [ ] Implement all of these in one framework (deSolve or odin2
       deterministic first, then stochastic) with a shared parameter
       interface.
+
+### Model comparison settings
+
+- [ ] **Match models on fundamental quantities**, not on raw parameter
+      values: $R_0$, the intrinsic rate of increase $r$, and the mean and
+      coefficient of variation of the generation interval. These are what
+      make different model structures comparable.
+  - Derive them analytically where possible.
+  - Where they aren't analytically derivable (or available in the
+    literature), compute them numerically: start the model with one
+    infected individual, switch off the effect of new infections on the
+    rest of the system, and integrate the number of infections generated.
+    That gives $R_0$ and the generation-interval distribution directly.
+  - The [`macpan2`](https://canmod.github.io/macpan2/) repository may have
+    machinery illustrating these computations; check it before writing our
+    own.
 
 ### Single-patch dynamics
 

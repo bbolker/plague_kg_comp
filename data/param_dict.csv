@@ -33,3 +33,8 @@ carcass_to_rat_trans,\beta^Q_r,,rat-flea,flea;rat,carcass-to-rat transmission ra
 carcass_to_human_trans,\beta^Q_h,,rat-flea,flea;human,carcass-to-human transmission rate (Didelot et al. 2017),1/day,,,,beta_h,x,yes,force of infection beta_h*Q*exp(-rho*T_r/K_r)/K_r
 carcass_range,\rho,,rat-flea,flea;rat,rat carcass infectivity range,dimensionless,,,,rho,x,yes,equivalent to KG a*K_R (= 10 in KG)
 R0_rat,R_0^r,,rat-flea,rat;flea,basic reproduction number for rats,dimensionless,,,,,,,KG: beta_R*K_F*(1-exp(-a*K_R))/d_F = 3.09; Didelot: beta_R*(1-exp(-rho))/delta_R
+vector_efficiency,E_v,,rat-flea,flea,vector efficiency: mean number of transmissions effected per infected flea (infection x vector x transmission potential),transmissions/flea,,,,,,,"empirical basis for KG beta_R; Wheeler & Douglas (1945) definition, measured on laboratory mice"
+flea_infect_prev,\phi_f,,rat-flea,flea,proportion of fleas infected in a sampled population,proportion,,,,,,,"field or laboratory prevalence of infection (not blockage); see flea_block_prev"
+flea_block_prev,\phi_b,,rat-flea,flea,proportion of fleas blocked (infective) in a sampled population,proportion,,,,,,,"only blocked fleas transmit biologically (Hinnebusch et al. 1998)"
+flea_infective_period,1/\gamma_f,,rat-flea,flea,time from a flea first transmitting to its death (duration of infectivity),days,,,,,,,"distinct from flea_free_survival (off-host survival) and flea_lifespan"
+flea_lifespan,L_f,,rat-flea,flea,mean lifespan of a flea with regular access to a host,days,,,,,,,"on-host lifespan with daily feeding; not the off-host survival d_F that KG use"
