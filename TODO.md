@@ -1,12 +1,5 @@
 # TODO
 
-## Setup / bibliography
-
-- [ ] Fix the citation upstream: the `keeling-gilligan.yaml` scenario in
-      yersinia cites KG *Nature* 2000 (`keeling2000metapopulation`), but
-      its R0 equation ("p. 2226") comes from KG *Proc R Soc B* 2000
-      (`keeling2000bubonic`).
-
 ## 1. Parameter comparisons and prior distributions
 
 ### 1a. Keeling–Gilligan parameters
